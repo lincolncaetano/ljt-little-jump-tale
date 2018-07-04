@@ -11,7 +11,7 @@ public class AdsScript : MonoBehaviour {
 #if UNITY_ANDROID
         string appId = "ca-app-pub-3940256099942544~3347511713";
 #elif UNITY_IPHONE
-        string appId = "ca-app-pub-3940256099942544~1458002511";
+        string appId = "ca-app-pub-4896657111169099~8693687948";
 #else
         string appId = "unexpected_platform";
 #endif
@@ -34,11 +34,11 @@ public class AdsScript : MonoBehaviour {
     {
         // These ad units are configured to always serve test ads.
 #if UNITY_EDITOR
-        string adUnitId = "unused";
+        string adUnitId = "";
 #elif UNITY_ANDROID
         string adUnitId = "ca-app-pub-3940256099942544/6300978111";
 #elif UNITY_IPHONE
-        string adUnitId = "";
+        string adUnitId = "ca-app-pub-3940256099942544/2934735716";
 #else
         string adUnitId = "unexpected_platform";
 #endif
@@ -100,5 +100,5 @@ public class AdsScript : MonoBehaviour {
     {
         MonoBehaviour.print("HandleAdLeftApplication event received");
     }
-
+        
 }
