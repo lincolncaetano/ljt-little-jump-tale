@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-//using Soomla.Profile;
 using UnityEngine.UI;
-//using ChartboostSDK;
 using GoogleMobileAds.Api;
+using GoogleMobileAds.Api.Mediation.Chartboost;
 
 public class GameOverScript : MonoBehaviour {
 
@@ -54,6 +53,9 @@ public class GameOverScript : MonoBehaviour {
     }
 
     public void VideoRequest2xScore(){
+
+
+       
         // Get singleton reward based video ad reference.
         this.rewardVideo2x = RewardBasedVideoAd.Instance;
 
