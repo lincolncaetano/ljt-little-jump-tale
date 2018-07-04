@@ -14,8 +14,11 @@ public class GameOverScript : MonoBehaviour {
     public GameObject btnPlay2X;
     public GameObject btnPlay5Gemas;
 
+    InterstitialAd interstitial;
+
     private RewardBasedVideoAd rewardVideo2x;
     private RewardBasedVideoAd rewardVideo5Gemas;
+
 
     void Start(){
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
@@ -24,11 +27,17 @@ public class GameOverScript : MonoBehaviour {
 
         VideoRequest2xScore();
         VideoRequest5Gemas();
-         
+        RequestInterstitial();
     }
     void Update () {
         txtScoreTotal.text = PlayerPrefs.GetInt("TotalScore").ToString();
         txtGemaTotal.text = PlayerPrefs.GetInt("TotalGema").ToString();
+
+        if(gc.currentState == GameController.GameStates.GameOver){
+            if (interstitial.IsLoaded()) {
+                interstitial.Show();
+            }
+        }
 
 
         if(this.rewardVideo2x.IsLoaded()){
@@ -79,7 +88,24 @@ public class GameOverScript : MonoBehaviour {
         this.rewardVideo5Gemas.LoadAd(request, adUnitId);
     }
 
-    
+    private void RequestInterstitial()
+    {
+        #if UNITY_ANDROID
+            string adUnitId = "ca-app-pub-3940256099942544/1033173712";
+        #elif UNITY_IPHONE
+            string adUnitId = "ca-app-pub-3940256099942544/4411468910";
+        #else
+            string adUnitId = "unexpected_platform";
+        #endif
+
+        // Initialize an InterstitialAd.
+        interstitial = new InterstitialAd(adUnitId);
+
+            // Create an empty ad request.
+        AdRequest request = new AdRequest.Builder().Build();
+        // Load the interstitial with the request.
+        interstitial.LoadAd(request);
+    }
 
 
     public void play2X(){
