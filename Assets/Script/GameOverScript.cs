@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 using GoogleMobileAds.Api;
-using GoogleMobileAds.Api.Mediation.Chartboost;
 
 public class GameOverScript : MonoBehaviour {
 
