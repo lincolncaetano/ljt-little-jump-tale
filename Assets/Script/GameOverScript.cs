@@ -82,6 +82,7 @@ public class GameOverScript : MonoBehaviour {
             string adUnitId = "unexpected_platform";
         #endif
 
+
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();
         // Load the rewarded video ad with the request.
