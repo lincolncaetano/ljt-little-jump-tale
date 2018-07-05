@@ -28,6 +28,7 @@ public class Player_control : MonoBehaviour {
 
 		audio = GetComponent<AudioSource>();
         audio.volume = 0.4f;
+		audio.pitch = 3;
 
         // if (SoomlaProfile.IsLoggedIn(Provider.FACEBOOK)){
         if(false)
@@ -39,6 +40,12 @@ public class Player_control : MonoBehaviour {
 	}
 
 	void Update () {
+
+		if(PlayerPrefs.GetInt("som") == 1){
+			audio.enabled = true;
+		}else{
+			audio.enabled = false;
+		}
 
 
 		if(controller.currentState == GameController.GameStates.GameOver){

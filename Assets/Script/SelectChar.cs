@@ -20,9 +20,9 @@ public class SelectChar : MonoBehaviour {
 	private bool comprado;
 
 	public void Start(){
-		PlayerPrefs.DeleteAll();
-		PlayerPrefs.SetInt("TotalScore", 5000);
-		PlayerPrefs.SetInt("TotalGema", 1000);
+		//PlayerPrefs.DeleteAll();
+		//PlayerPrefs.SetInt("TotalScore", 5000);
+		//PlayerPrefs.SetInt("TotalGema", 1000);
 
 		gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 		chScript = GameObject.FindGameObjectWithTag(CharsScript.tag).GetComponent<CharsScript>();

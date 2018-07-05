@@ -82,6 +82,8 @@ public class GameController : MonoBehaviour {
 		}
 		if(PlayerPrefs.GetInt("primeiroJogo") == 0){
 			PlayerPrefs.SetInt("primeiroJogo",1);
+			PlayerPrefs.SetInt("musica", 1);
+			PlayerPrefs.SetInt("som", 1);
 		}
 
 		GameObject obj = null;
@@ -267,6 +269,14 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		txtScore.text = score.ToString();
+		if(PlayerPrefs.GetInt("musica") == 1){
+			audioS.enabled = true;
+			if(!audioS.isPlaying){
+				audioS.Play();
+			}
+		}else{
+			audioS.enabled = false;
+		}
 
 		if (Application.platform == RuntimePlatform.Android) {
 			if (Input.GetKeyUp(KeyCode.Escape)) {
@@ -279,6 +289,7 @@ public class GameController : MonoBehaviour {
 		
 		}else if(currentState == GameStates.Watting){
 
+			
 			if(!audioS.isPlaying){
 				audioS.Play();
 			}
@@ -314,7 +325,7 @@ public class GameController : MonoBehaviour {
 			
 		}else if(currentState == GameStates.GameOver){
 
-			audioS.Stop();
+			//audioS.Stop();
 
 			best.text = PlayerPrefs.GetInt("BestScore").ToString();
 			scoreGameOver.text = score.ToString();
