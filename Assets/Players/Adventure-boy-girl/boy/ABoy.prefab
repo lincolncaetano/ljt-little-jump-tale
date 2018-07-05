@@ -220,8 +220,8 @@ MonoBehaviour:
   rigi: {fileID: 50398259586149348}
   especialContPla: 5
   usoSpeceial: 0
-  audioGoomo: {fileID: 8300000, guid: c36fa08ef01a24023aed81ce8c980720, type: 3}
-  audioSpecial: {fileID: 8300000, guid: b47b48a76950e41edbf228b853955b07, type: 3}
+  audioGoomo: {fileID: 8300000, guid: 9f110f013401f42e996da5094d6f8b8b, type: 3}
+  audioSpecial: {fileID: 8300000, guid: 73ba26e6504d5460d814fc3b6836fa3a, type: 3}
   audioOps: {fileID: 8300000, guid: adcbbbae313cb40978e30faf82938987, type: 3}
   audio: {fileID: 0}
   duration: 0.38
