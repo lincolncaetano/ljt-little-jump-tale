@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-//using Soomla.Profile;
 
 public class HudScript : MonoBehaviour {
 
@@ -8,7 +6,6 @@ public class HudScript : MonoBehaviour {
 	public GameObject panelMenu, panelGame, panelPause, panelGameOver, panelShop, btnLogout, panelWatting;
 	public GameController controller;
 
-	//private Provider targetProvider = Provider.FACEBOOK;
 
 	void Update () {
 
@@ -44,12 +41,6 @@ public class HudScript : MonoBehaviour {
 			panelShop.SetActive(false);
 			panelWatting.SetActive(false);
 
-            if (false)
-            {
-                btnLogout.SetActive(true);
-			}else{
-				btnLogout.SetActive(false);
-			}
 
 		}else if(controller.currentState == GameController.GameStates.GameOver){
 			panelMenu.SetActive(false);
