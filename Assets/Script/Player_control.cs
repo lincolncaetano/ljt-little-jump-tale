@@ -27,7 +27,7 @@ public class Player_control : MonoBehaviour {
 		animSpecial = GameObject.FindGameObjectWithTag("ShowSpecial").GetComponent<Animator>();
 
 		audio = GetComponent<AudioSource>();
-        audio.volume = 0.4f;
+        audio.volume = 0.5f;
 		audio.pitch = 3;
 
         // if (SoomlaProfile.IsLoggedIn(Provider.FACEBOOK)){
