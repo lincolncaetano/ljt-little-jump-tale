@@ -17,16 +17,16 @@ public class PlataformaScript : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col)
     {
-        player.grounded = true;
+        //player.grounded = false;
     }
 
 	void OnTriggerStay2D(Collider2D col)
     {
-        player.grounded = true;
+        //player.grounded = true;
     }
 
 	void OnTriggerExit2D(Collider2D col)
     {
-        player.grounded = false;
+        //player.grounded = false;
     }
 }
