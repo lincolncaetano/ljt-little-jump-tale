@@ -22,6 +22,9 @@ public class Player_control : MonoBehaviour {
 	private bool validaGameOver = true;
 	private bool validaEspecial = true;
 
+	[Range(1,10)]
+	public float jumpVelocity;
+
 	void Start(){
 		controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 		animSpecial = GameObject.FindGameObjectWithTag("ShowSpecial").GetComponent<Animator>();
@@ -30,13 +33,7 @@ public class Player_control : MonoBehaviour {
         audio.volume = 0.5f;
 		audio.pitch = 3;
 
-        // if (SoomlaProfile.IsLoggedIn(Provider.FACEBOOK)){
-        if(false)
-         {
-                usoSpeceial = 2;
-		}else{
-			usoSpeceial = 1;
-		}
+        usoSpeceial = 1;
 	}
 
 	void Update () {
@@ -45,6 +42,10 @@ public class Player_control : MonoBehaviour {
 			audio.enabled = true;
 		}else{
 			audio.enabled = false;
+		}
+
+		if(Input.GetButtonDown("Jump")){
+			GetComponent<Rigidbody2D>().velocity = Vector2.up * jumpVelocity;
 		}
 
 
