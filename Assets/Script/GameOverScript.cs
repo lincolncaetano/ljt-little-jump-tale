@@ -81,7 +81,8 @@ public class GameOverScript : MonoBehaviour {
     public void ConfigureVideoRequest5Gemas(){
         // Get singleton reward based video ad reference.
         this.rewardVideo5Gemas = RewardBasedVideoAd.Instance;
-
+        this.rewardVideo5Gemas.SetUserId("5Gemas");
+        
         // Called when an ad request has successfully loaded.
         rewardVideo5Gemas.OnAdLoaded += HandleRewardVideo5GemasLoaded;
         // Called when an ad request failed to load.
@@ -162,7 +163,7 @@ public class GameOverScript : MonoBehaviour {
     }
 
     public void RequestAds(){
-        RequestInterstitial();
+        ConfigureRequestInterstitial();
         VideoRequest2xScore();
         VideoRequest5Gemas();
     }
