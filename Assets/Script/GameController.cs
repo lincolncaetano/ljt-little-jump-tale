@@ -70,6 +70,10 @@ public class GameController : MonoBehaviour {
 
 	private int countChart;
 
+	public float levalWidth = 3f;
+	public float minY = 1.2f;
+	public float maxY = 3.9f;
+
 
 	void Start () {
 
@@ -181,43 +185,7 @@ public class GameController : MonoBehaviour {
 				
 			}else{
 				
-				if(nCenario == 0){
-					obj = Instantiate(platFloresta[Random.Range(0,platFloresta.Length)]) as GameObject;
-				}else if(nCenario == 1){
-					obj = Instantiate(platDeserto[Random.Range(0,platDeserto.Length)]) as GameObject;
-				}else if(nCenario == 2){
-					obj = Instantiate(platNeve[Random.Range(0,platNeve.Length)]) as GameObject;
-				}else{
-					obj = Instantiate(platCemiterio[Random.Range(0,platCemiterio.Length)]) as GameObject;
-				}
-
-                ScripPlataforma scrip = ultimo.GetComponent<ScripPlataforma>();
-                scrip.proximo = obj;
-                Vector3 topoAnt = scrip.topo.transform.localPosition;
-
-                int lado = Random.Range(0, 2);
-                if (lado == 1)
-                {
-                    obj.GetComponent<ScripPlataforma>().left = false;
-                }
-                else
-                {
-                    obj.GetComponent<ScripPlataforma>().left = true;
-                }
-
-
-                if (obj.GetComponent<ScripPlataforma>().left)
-                {
-                    obj.transform.localPosition = new Vector3(-1.9f, ultimo.transform.localPosition.y + 3.9f, 0);
-                }
-                else
-                {
-                    obj.transform.localPosition = new Vector3(1.9f, ultimo.transform.localPosition.y + 3.9f, 0);
-                }
-
-                //obj.transform.position = topoAnt;
-                obj.transform.parent = cenario.transform;
-                ultimo = obj;
+				SpawnPlataforma();
 
 			}
 		}
@@ -231,10 +199,6 @@ public class GameController : MonoBehaviour {
 			neve.SetActive(false);
 		}
 		
-		
-		
-		configuraCurva();
-		configuraCurvaErrada();
 	}
 
 	public void BtnReset(){
@@ -302,7 +266,7 @@ public class GameController : MonoBehaviour {
 		}else if(currentState == GameStates.InGame){
 
 			if(!player.GetComponent<Player_control>().especial){
-				amout = amout - decrementaTempo * Time.deltaTime;
+				//amout = amout - decrementaTempo * Time.deltaTime;
 			}
 			health.fillAmount = amout /20;
 			health.color = Color.white;
@@ -365,101 +329,34 @@ public class GameController : MonoBehaviour {
 		panelClose.SetActive(false);
 	}
 
-
-	public void BtnRigth(){
-		StartGame();
-		SpawnPlataforma();
-
-		configuraCurva();
-		configuraCurvaErrada();
-		
-		if(proximoPlat.GetComponent<ScripPlataforma>().left){
-			currentState = GameStates.GameOver;
-		}else{
-			proximoPlat = proximoPlat.GetComponent<ScripPlataforma>().proximo;
-		}
-
-
-
-	}
-
-
-	
-	public void BtnLeft(){
-		StartGame();
-		SpawnPlataforma();
-
-		configuraCurva();
-		configuraCurvaErrada();
-
-		if(!proximoPlat.GetComponent<ScripPlataforma>().left){
-			currentState = GameStates.GameOver;
-		}else{
-			proximoPlat = proximoPlat.GetComponent<ScripPlataforma>().proximo;
-		}
-
-	}
-
 	public void BtnEspecial(int aux){
-
-
 		for(int cont =0; cont < aux; cont ++){
 			SpawnPlataforma();
-			configuraCurva();
 			proximoPlat = proximoPlat.GetComponent<ScripPlataforma>().proximo;
 		}
-
 	}
 
-	public BezierCurve ValidaPulo(bool left){
-
-		if(left && proximoPlat.GetComponent<ScripPlataforma>().left){
-			return curve;
-		}else if(!left && !proximoPlat.GetComponent<ScripPlataforma>().left){
-			return curve;
-		} else{
-			return curveErrada;
-		}
-	}
-
-
-
-	private void SpawnPlataforma(){
+	Vector3 spawPosition = new Vector3();
+	public void SpawnPlataforma(){
 
 		nPlataforma++;
+		spawPosition.y += Random.Range(minY, maxY);
+		spawPosition.x = Random.Range(-levalWidth, levalWidth);
+
 
         if(nCenario == 0){
-			obj = Instantiate(platFloresta[Random.Range(0,platFloresta.Length)]) as GameObject;
+			obj = Instantiate(platFloresta[Random.Range(0,platFloresta.Length)], spawPosition, Quaternion.identity );
 		}else if(nCenario == 1){
-			obj = Instantiate(platDeserto[Random.Range(0,platDeserto.Length)]) as GameObject;
+			obj = Instantiate(platDeserto[Random.Range(0,platDeserto.Length)], spawPosition, Quaternion.identity );
 		}else if(nCenario == 2){
-			obj = Instantiate(platNeve[Random.Range(0,platNeve.Length)]) as GameObject;
+			obj = Instantiate(platNeve[Random.Range(0,platNeve.Length)], spawPosition, Quaternion.identity );
 		}else{
-			obj = Instantiate(platCemiterio[Random.Range(0,platCemiterio.Length)]) as GameObject;
+			obj = Instantiate(platCemiterio[Random.Range(0,platCemiterio.Length)], spawPosition, Quaternion.identity );
 		}
 
         ScripPlataforma scrip = ultimo.GetComponent<ScripPlataforma>();
 		scrip.proximo = obj;
-		Vector3 topoAnt = scrip.topo.transform.localPosition;
-
-        int lado = Random.Range(0, 2);
-        if (lado == 1)
-        {
-            obj.GetComponent<ScripPlataforma>().left = false;
-        }
-        else {
-            obj.GetComponent<ScripPlataforma>().left = true;
-        }
-
-
-        if (obj.GetComponent<ScripPlataforma>().left)
-        {
-            obj.transform.localPosition = new Vector3(-1.9f, ultimo.transform.localPosition.y + 3.2f, 0);
-        }
-        else
-        {
-            obj.transform.localPosition = new Vector3(1.9f, ultimo.transform.localPosition.y + 3.2f, 0);
-        }
+		
 
         //obj.transform.position = topoAnt;
 		obj.transform.parent = cenario.transform;
@@ -484,7 +381,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void BtnWatting(){
-		currentState = GameStates.Watting;
+		currentState = GameStates.InGame;
 	}
 
 	public void BtnPause(){
@@ -500,54 +397,6 @@ public class GameController : MonoBehaviour {
 	public void BtnResume(){
 		currentState = GameStates.InGame;
 		Time.timeScale = 1f;
-	}
-
-
-
-
-
-
-
-	void configuraCurva(){
-		curve.points[0] = player.transform.position;
-		
-		ScripPlataforma scripPlat = proximoPlat.GetComponent<ScripPlataforma>();
-		Player_control scriptPlayer = player.GetComponent<Player_control>();
-		
-		if(scripPlat.left && scriptPlayer.left){
-			curve.points[1] = new Vector3(player.transform.position.x, player.transform.position.y + 5,0);
-		}else if(!scripPlat.left && !scriptPlayer.left){
-			curve.points[1] = new Vector3(player.transform.position.x, player.transform.position.y + 5,0);
-		}else{
-			curve.points[1] = new Vector3(0, player.transform.position.y + 5,0);
-		}
-		
-		
-		curve.points[2] = proximoPlat.GetComponent<ScripPlataforma>().item.transform.position;
-	}
-
-	void configuraCurvaErrada(){
-
-		curveErrada.points[0] = player.transform.position;
-		
-		ScripPlataforma scripPlat = proximoPlat.GetComponent<ScripPlataforma>();
-		Player_control scriptPlayer = player.GetComponent<Player_control>();
-		
-		if(scripPlat.left && scriptPlayer.left){
-			curveErrada.points[1] = new Vector3(player.transform.position.x, player.transform.position.y + 5,0);
-		}else if(!scripPlat.left && !scriptPlayer.left){
-			curveErrada.points[1] = new Vector3(player.transform.position.x, player.transform.position.y + 5,0);
-		}else{
-			curveErrada.points[1] = new Vector3(0, player.transform.position.y + 5,0);
-		}
-
-
-		Vector3 vecAux = proximoPlat.GetComponent<ScripPlataforma>().item.transform.position;
-		if(scripPlat.left){
-			curveErrada.points[2] = new Vector3(-vecAux.x, vecAux.y,  vecAux.z); 
-		}
-
-		curveErrada.points[2] = proximoPlat.GetComponent<ScripPlataforma>().item.transform.position;
 	}
 
 }

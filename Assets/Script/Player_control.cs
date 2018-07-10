@@ -22,8 +22,10 @@ public class Player_control : MonoBehaviour {
 	private bool validaGameOver = true;
 	private bool validaEspecial = true;
 
-	[Range(1,10)]
-	public float jumpVelocity;
+
+	[HideInInspector] public bool facingRight = true;
+	private float moviment = 0f;
+	public float movimentSpeed = 10f;
 
 	void Start(){
 		controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
@@ -36,6 +38,7 @@ public class Player_control : MonoBehaviour {
         usoSpeceial = 1;
 	}
 
+	
 	void Update () {
 
 		if(PlayerPrefs.GetInt("som") == 1){
@@ -44,36 +47,19 @@ public class Player_control : MonoBehaviour {
 			audio.enabled = false;
 		}
 
-		if(Input.GetButtonDown("Jump")){
-			GetComponent<Rigidbody2D>().velocity = Vector2.up * jumpVelocity;
-		}
+		moviment = Input.GetAxis("Horizontal") * movimentSpeed;
+        
+        if (controller.currentState == GameController.GameStates.InGame)
+        {
+			
+        }
 
 
 		if(controller.currentState == GameController.GameStates.GameOver){
-            rigi.bodyType = RigidbodyType2D.Dynamic;
+            
         }
 
-		if(pula){
-			progress += Time.deltaTime / duration;
-			if (progress > 1f) {
-				progress = 1f;
-				pula = false;
-			}
-
-			if (progress > 0.7f) {
-
-				if(!left){
-					transform.rotation = Quaternion.Euler(0,180,0);
-				}else{
-					transform.rotation = Quaternion.Euler(0,0,0);
-				}
-			}
-			transform.localPosition = curve.GetPoint(progress);
-
-		}
-
 		if(controller.currentState == GameController.GameStates.InGame){
-            rigi.bodyType = RigidbodyType2D.Kinematic;
             if (usoSpeceial <= 0){
 				GameObject.FindGameObjectWithTag("BtnSpecial").GetComponent<Button>().interactable = false;
 			}else{
@@ -94,22 +80,6 @@ public class Player_control : MonoBehaviour {
 
 		if(especial){
 
-			GetComponent<BoxCollider2D>().size = new Vector2(1000,1);
-
-			progress += Time.deltaTime / durationEspecial;
-			if (progress > 1f) {
-				progress = 1f;
-				especial = false;
-				anim.SetBool("special", false);
-				animSpecial.SetBool("special", false);
-				usoSpeceial--;
-				GameObject.FindGameObjectWithTag("BtnSpecial").GetComponent<Button>().interactable = true;
-				validaEspecial = true;
-			}else{
-				GameObject.FindGameObjectWithTag("BtnSpecial").GetComponent<Button>().interactable = false;
-				validaEspecial = false;
-			}
-			transform.localPosition = controller.curve.GetPoint(progress);
 
 		}else{
 
@@ -121,74 +91,30 @@ public class Player_control : MonoBehaviour {
 
 		}
 
-
-
 	}
 
+	void FixedUpdate()
+    {
+        //float h = moviment;
+		Vector2 velocity = rigi.velocity;
+		velocity.x = moviment;
+		rigi.velocity = velocity;
 
-	private BezierCurve curve;
-	
-	public float duration;
+        if (moviment > 0 && !facingRight)
+            Flip ();
+        else if (moviment < 0 && facingRight)
+            Flip ();
+    }
 
-	private float durationEspecial = 3f;
-	
-	private float progress;
-
-
-	public void BtnRigth(){
-
-		if(especial == false){
-
-			audio.PlayOneShot(audioGoomo);
-
-			if(progress > 0 && progress < 1){
-				transform.localPosition = curve.GetPoint(1f);
-			}
-
-			curve = controller.ValidaPulo(false);
-			pula = true;
-			progress = 0;
-
-			 if(controller.currentState == GameController.GameStates.Watting || controller.currentState == GameController.GameStates.InGame){
+	void Flip()
+    {
+        facingRight = !facingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+    }
 
 
-				anim.SetTrigger("jump");
-				if(left){
-					left = false;
-				}
-				
-				controller.BtnRigth();
-			}
-		}
-
-	}
-	
-	public void BtnLeft(){
-
-		if(especial == false){
-
-			audio.PlayOneShot(audioGoomo);
-
-			if(progress > 0 && progress < 1){
-				transform.localPosition = curve.GetPoint(1f);
-			}
-
-			curve = controller.ValidaPulo(true);
-			pula = true;
-			progress = 0;
-
-
-
-			if(controller.currentState == GameController.GameStates.Watting || controller.currentState == GameController.GameStates.InGame){
-
-				anim.SetTrigger("jump");
-				if(!left){
-					left = true;
-				}
-				controller.BtnLeft();
-			}
-		}
-	}
 
 	public void btnEspecial(){
 
@@ -199,7 +125,6 @@ public class Player_control : MonoBehaviour {
 			pula = false;
 			controller.BtnEspecial(especialContPla);
 			especial = true;
-			progress =0;
 			anim.SetBool("special", true);
 			animSpecial.SetBool("special", true);
 

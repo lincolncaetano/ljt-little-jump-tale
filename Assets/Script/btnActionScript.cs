@@ -10,12 +10,7 @@ public class btnActionScript : MonoBehaviour , IPointerDownHandler{
 	public void OnPointerDown(PointerEventData data){
 
 		if(!especial){
-			if(left){
-				playerCont.BtnLeft();
-				
-			}else{
-				playerCont.BtnRigth();
-			}
+			
 		}else{
 			playerCont.btnEspecial();
 		}

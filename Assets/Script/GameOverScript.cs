@@ -33,7 +33,7 @@ public class GameOverScript : MonoBehaviour {
         txtGemaTotal.text = PlayerPrefs.GetInt("TotalGema").ToString();
 
         if(gc.currentState == GameController.GameStates.GameOver){
-            if (interstitial.IsLoaded()) {
+            if (interstitial!= null == interstitial.IsLoaded()) {
                 interstitial.Show();
             }
         }
