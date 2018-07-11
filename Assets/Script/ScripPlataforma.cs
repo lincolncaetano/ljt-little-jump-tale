@@ -12,6 +12,7 @@ public class ScripPlataforma : MonoBehaviour {
 	private GameController gc;
 
 	private float jumpForce = 12f;
+	public bool inicio = false;
 
 	void Start(){
 		gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
@@ -19,7 +20,7 @@ public class ScripPlataforma : MonoBehaviour {
 
 	 void OnCollisionEnter2D(Collision2D col)
     {
-		if(col.relativeVelocity.y <= 0f){
+		if(gc.currentState == GameController.GameStates.InGame && col.relativeVelocity.y <= 0f){
 			Rigidbody2D rigi = col.collider.GetComponent<Rigidbody2D>();
 			if(rigi != null){
 				Vector2 velocity = rigi.velocity;
@@ -32,4 +33,21 @@ public class ScripPlataforma : MonoBehaviour {
 			}
 		}
     }
+
+	void OnCollisionStay2D(Collision2D col){
+		if(gc.currentState == GameController.GameStates.InGame && inicio){
+			if(col.relativeVelocity.y <= 0f){
+				Rigidbody2D rigi = col.collider.GetComponent<Rigidbody2D>();
+				if(rigi != null){
+					Vector2 velocity = rigi.velocity;
+					velocity.y = jumpForce;
+					rigi.velocity = velocity;
+					for (int i = 0; i < 50; i++)
+					{
+						gc.SpawnPlataforma();
+					}
+				}
+			}
+		}
+	}
 }

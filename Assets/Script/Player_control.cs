@@ -47,12 +47,17 @@ public class Player_control : MonoBehaviour {
 			audio.enabled = false;
 		}
 
-		moviment = Input.GetAxis("Horizontal") * movimentSpeed;
+		 #if UNITY_ANDROID
+            moviment = Input.acceleration.x * movimentSpeed;
+        #elif UNITY_IPHONE
+            moviment = Input.acceleration.x * movimentSpeed;
+        #else
+            moviment = Input.GetAxis("Horizontal") * movimentSpeed;
+        #endif
+
+		
         
-        if (controller.currentState == GameController.GameStates.InGame)
-        {
-			
-        }
+        
 
 
 		if(controller.currentState == GameController.GameStates.GameOver){
@@ -95,15 +100,19 @@ public class Player_control : MonoBehaviour {
 
 	void FixedUpdate()
     {
-        //float h = moviment;
-		Vector2 velocity = rigi.velocity;
-		velocity.x = moviment;
-		rigi.velocity = velocity;
 
-        if (moviment > 0 && !facingRight)
-            Flip ();
-        else if (moviment < 0 && facingRight)
-            Flip ();
+		if (controller.currentState == GameController.GameStates.InGame)
+        {
+			Vector2 velocity = rigi.velocity;
+			velocity.x = moviment;
+			rigi.velocity = velocity;
+
+			if (moviment > 0 && !facingRight)
+				Flip ();
+			else if (moviment < 0 && facingRight)
+				Flip ();
+        }
+        //float h = moviment;
     }
 
 	void Flip()
@@ -137,7 +146,6 @@ public class Player_control : MonoBehaviour {
 	public void ResetPlayer(){
 		anim.SetBool("dead", false);
 		left = true;
-        rigi.bodyType = RigidbodyType2D.Static;
         transform.rotation = Quaternion.Euler(0,0,0);
 		usoSpeceial = 1;
 		validaGameOver = true;
