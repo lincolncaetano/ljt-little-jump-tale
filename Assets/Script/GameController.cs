@@ -74,6 +74,8 @@ public class GameController : MonoBehaviour {
 	public float minY = 1.2f;
 	public float maxY = 3.9f;
 	public GameObject itemEstrela;
+	public GameObject itemRaio;
+	public GameObject destroyer;
 
 
 	void Start () {
@@ -205,14 +207,8 @@ public class GameController : MonoBehaviour {
 	public void BtnReset(){
 		score = 0;
 		//amout = 10;
-		nPlataforma =0;
+		nPlataforma = 0;
 		validaGameOver = true;
-		decrementaTempo = decrementoTempoInicial;
-
-
-		nCenario = Random.Range(0,3);
-		cenario = listaCenario[nCenario];
-
 
 
 		GameObject.FindGameObjectWithTag("Player").GetComponent<Player_control>().ResetPlayer();
@@ -220,7 +216,12 @@ public class GameController : MonoBehaviour {
 		foreach(GameObject plataforma in GameObject.FindGameObjectsWithTag("Plataforma")){
 			Destroy(plataforma);
 		}
+		foreach(GameObject plataforma in GameObject.FindGameObjectsWithTag("Item")){
+			Destroy(plataforma);
+		}
 
+		destroyer.GetComponent<DestroyPlatformSript>().Reset();
+		spawPosition = new Vector3();
 
 		cenario.transform.position = Vector3.zero;
 		inicializaFase();
@@ -269,20 +270,14 @@ public class GameController : MonoBehaviour {
 			if(!player.GetComponent<Player_control>().especial){
 				//amout = amout - decrementaTempo * Time.deltaTime;
 			}
-			//health.fillAmount = amout /20;
-			//health.color = Color.white;
-
-			//if(amout <= 0){
-			//	currentState = GameStates.GameOver;
-			//}
-
-
-
+			
 			if(score % 20 == 0 && score > scoreAnt){
-				//decrementaTempo += 0.25f; 
 				scoreAnt = score;
 			}
-
+			
+			if(destroyer.transform.position.y + 20  > spawPosition.y){
+				SpawnPlataforma();
+			}
 
 
 
@@ -362,7 +357,15 @@ public class GameController : MonoBehaviour {
         //obj.transform.position = topoAnt;
 		obj.transform.parent = cenario.transform;
 		ultimo = obj;
-		SpawEstrela();
+		
+
+		float randValue = Random.value;
+		if (randValue > .9f) // 45% of the time
+		{
+			SpawRaio();
+		}else{
+			SpawEstrela();
+		}
 	}
 
 	public void SpawEstrela(){
@@ -375,6 +378,15 @@ public class GameController : MonoBehaviour {
 
 	}
 
+	public void SpawRaio(){
+
+		Vector3 spawPositionEstrela = spawPosition;
+		spawPositionEstrela.y += Random.Range(2f, 5f);
+		spawPositionEstrela.x = Random.Range(-levalWidth, levalWidth);
+		Instantiate( itemRaio , spawPositionEstrela, Quaternion.identity );
+
+	}
+
 
 	public void StartGame(){
 		if(currentState == GameStates.Watting){
@@ -384,16 +396,18 @@ public class GameController : MonoBehaviour {
 
 
 	public void AddContScore(){
-		//amout = amout + 0.5f;
-		//if(amout > 20){
-		//	amout = 20;
-		//}
-		//health.color = Color.black;
 		score++;
 	}
 
 	public void BtnWatting(){
 		currentState = GameStates.InGame;
+
+		Rigidbody2D rigi = player.GetComponent<Rigidbody2D>();
+		if(rigi != null){
+			Vector2 velocity = rigi.velocity;
+			velocity.y = 12;
+			rigi.velocity = velocity;
+		}
 	}
 
 	public void BtnPause(){

@@ -21,10 +21,10 @@ GameObject:
   - component: {fileID: 4807688255581976}
   - component: {fileID: 212246489968371260}
   - component: {fileID: 50591857665901556}
-  - component: {fileID: 61602908482088032}
   - component: {fileID: 114123935111576286}
   - component: {fileID: 82128840881540980}
   - component: {fileID: 95306209477930388}
+  - component: {fileID: 61791407948878696}
   m_Layer: 0
   m_Name: Cat
   m_TagString: Player
@@ -39,8 +39,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1082747131596810}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.57, y: -0.28, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalPosition: {x: -1.1696322, y: -3.47963, z: 0}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -52,7 +52,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1082747131596810}
-  m_BodyType: 2
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -63,9 +63,9 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!61 &61602908482088032
+  m_CollisionDetection: 1
+  m_Constraints: 4
+--- !u!61 &61791407948878696
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -77,18 +77,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.25, y: 3.16}
+  m_Offset: {x: -0.40715337, y: 2.3021395}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
-    oldSize: {x: 5.42, y: 4.74}
+    oldSize: {x: 5.42, y: 4.7400002}
     newSize: {x: 4.16, y: 4.54}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.8, y: 5.27}
+  m_Size: {x: 2.7056413, y: 4.2649817}
   m_EdgeRadius: 0
 --- !u!82 &82128840881540980
 AudioSource:
@@ -224,7 +224,8 @@ MonoBehaviour:
   audioSpecial: {fileID: 8300000, guid: 73ba26e6504d5460d814fc3b6836fa3a, type: 3}
   audioOps: {fileID: 8300000, guid: adcbbbae313cb40978e30faf82938987, type: 3}
   audio: {fileID: 0}
-  duration: 0.38
+  facingRight: 1
+  movimentSpeed: 10
 --- !u!212 &212246489968371260
 SpriteRenderer:
   m_ObjectHideFlags: 1

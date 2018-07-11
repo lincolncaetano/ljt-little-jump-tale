@@ -47,14 +47,14 @@ public class Player_control : MonoBehaviour {
 			audio.enabled = false;
 		}
 
-		 #if UNITY_ANDROID
+		#if UNITY_ANDROID
             moviment = Input.acceleration.x * movimentSpeed;
         #elif UNITY_IPHONE
             moviment = Input.acceleration.x * movimentSpeed;
         #else
-            moviment = Input.GetAxis("Horizontal") * movimentSpeed;
         #endif
 
+            moviment = Input.GetAxis("Horizontal") * movimentSpeed;
 		
         
         
@@ -65,15 +65,11 @@ public class Player_control : MonoBehaviour {
         }
 
 		if(controller.currentState == GameController.GameStates.InGame){
-            if (usoSpeceial <= 0){
-				GameObject.FindGameObjectWithTag("BtnSpecial").GetComponent<Button>().interactable = false;
-			}else{
-				GameObject.FindGameObjectWithTag("BtnSpecial").GetComponent<Button>().interactable = true;
-			}
+           
 		}
 
 		if(controller.currentState == GameController.GameStates.Watting){
-			GameObject.FindGameObjectWithTag("BtnSpecial").GetComponent<Button>().interactable = false;
+			
 		}
 
 		if(controller.currentState == GameController.GameStates.GameOver){

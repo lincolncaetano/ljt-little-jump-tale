@@ -26,10 +26,6 @@ public class ScripPlataforma : MonoBehaviour {
 				Vector2 velocity = rigi.velocity;
 				velocity.y = jumpForce;
 				rigi.velocity = velocity;
-				for (int i = 0; i < 50; i++)
-				{
-					gc.SpawnPlataforma();
-				}
 			}
 		}
     }
@@ -42,10 +38,6 @@ public class ScripPlataforma : MonoBehaviour {
 					Vector2 velocity = rigi.velocity;
 					velocity.y = jumpForce;
 					rigi.velocity = velocity;
-					for (int i = 0; i < 50; i++)
-					{
-						gc.SpawnPlataforma();
-					}
 				}
 			}
 		}

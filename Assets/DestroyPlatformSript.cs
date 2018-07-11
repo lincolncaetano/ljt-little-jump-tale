@@ -9,12 +9,13 @@ public class DestroyPlatformSript : MonoBehaviour {
 	private Vector3 newPos;
 	private GameController gc;
 
+	void Start(){
+		gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+	}
 	void Update(){
 		if(player == null){
 			player = GameObject.FindGameObjectWithTag("Player").transform;
-			//transform.parent = player;
 		}
-		gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 	}
 	void FixedUpdate ()
 	{
@@ -32,11 +33,15 @@ public class DestroyPlatformSript : MonoBehaviour {
 		}else if(col.GetComponent<ScripPlataforma>()!= null && !col.GetComponent<ScripPlataforma>().inicio){
 			Destroy(col.gameObject);
 		}
+
+		if(col.gameObject.tag.Equals("Item")){
+			Destroy(col.gameObject);
+		}
     }
 
-	void OnCollisionEnter2D(Collision2D col)
-    {	
-		
-		
-    }
+	public void Reset(){
+		Vector3 posicaoInicial = new Vector3(0, -4.94f, 0);
+		transform.position = posicaoInicial;
+	}
+
 }
