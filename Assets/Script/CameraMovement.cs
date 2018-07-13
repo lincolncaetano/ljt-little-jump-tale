@@ -15,7 +15,7 @@ public class CameraMovement : MonoBehaviour {
 	{
 		if(controller.currentState == GameController.GameStates.InGame){
 			
-			Vector3 newPos = new Vector3(transform.position.x, player.position.y + 1 , transform.position.z);
+			Vector3 newPos = new Vector3(transform.position.x, player.position.y + 2 , transform.position.z);
 			transform.position = Vector3.Lerp(transform.position, newPos , smooth * Time.deltaTime);
 
 		}

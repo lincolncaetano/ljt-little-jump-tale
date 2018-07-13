@@ -12,7 +12,7 @@ public class itemColl : MonoBehaviour {
 	
 	void OnTriggerEnter2D(Collider2D other) {
 
-		if(controller.currentState == GameController.GameStates.InGame){
+		if(controller != null && controller.currentState == GameController.GameStates.InGame){
 			if(other.tag == "Player"){
 				Destroy(this.gameObject);
 				controller.AddContScore();

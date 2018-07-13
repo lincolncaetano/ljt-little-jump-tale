@@ -30,6 +30,8 @@ public class Player_control : MonoBehaviour {
 	void Start(){
 		controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 		animSpecial = GameObject.FindGameObjectWithTag("ShowSpecial").GetComponent<Animator>();
+		raio = transform.Find("Raio").gameObject;
+		ima = transform.Find("Ima").gameObject;
 
 		audio = GetComponent<AudioSource>();
         audio.volume = 0.5f;
@@ -107,6 +109,10 @@ public class Player_control : MonoBehaviour {
 				Flip ();
 			else if (moviment < 0 && facingRight)
 				Flip ();
+
+
+			 AtivaRaio();
+			 AtivaIma();
         }
         //float h = moviment;
     }
@@ -121,24 +127,6 @@ public class Player_control : MonoBehaviour {
 
 
 
-	public void btnEspecial(){
-
-		if(controller.currentState == GameController.GameStates.InGame && usoSpeceial > 0 && validaEspecial){
-
-			audio.PlayOneShot(audioSpecial);
-
-			pula = false;
-			controller.BtnEspecial(especialContPla);
-			especial = true;
-			anim.SetBool("special", true);
-			animSpecial.SetBool("special", true);
-
-		}
-
-
-	}
-
-
 	public void ResetPlayer(){
 		anim.SetBool("dead", false);
 		left = true;
@@ -147,5 +135,35 @@ public class Player_control : MonoBehaviour {
 		validaGameOver = true;
 	}
 
+
+	private GameObject raio;
+	public float timeRaio;
+	private void AtivaRaio(){
+		if(timeRaio > 0f){
+			raio.SetActive(true);
+			timeRaio -= Time.deltaTime;
+		}else{
+			raio.SetActive(false);
+		}
+	}
 	
+	private GameObject ima;
+	public float timeIma;
+	private void AtivaIma(){
+		if(timeIma > 0f){
+			ima.SetActive(true);
+			timeIma -= Time.deltaTime;
+		}else{
+			ima.SetActive(false);
+		}
+	}
+
+	void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.gameObject.tag == "Plataforma"){
+			if(col.relativeVelocity.y > 0f){
+				anim.SetTrigger("jump");
+			}
+		}
+    }
 }

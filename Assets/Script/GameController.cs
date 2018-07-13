@@ -39,11 +39,6 @@ public class GameController : MonoBehaviour {
 	public BezierCurve curve;
 	public BezierCurve curveErrada;
 
-
-	public btnActionScript btnCanvasRigth;
-	public btnActionScript btnCanvasLeft;
-	public btnActionScript btnCanvasEspecial;
-
 	public GameObject btnNoAds;
 	public GameObject btnNoAdsGameOver;
 	private bool validaGameOver = true;
@@ -75,6 +70,7 @@ public class GameController : MonoBehaviour {
 	public float maxY = 3.9f;
 	public GameObject itemEstrela;
 	public GameObject itemRaio;
+	public GameObject itemIma;
 	public GameObject destroyer;
 
 
@@ -104,10 +100,6 @@ public class GameController : MonoBehaviour {
 		obj.transform.position = GameObject.FindGameObjectWithTag("PlayerStart").transform.position;
 		player = GameObject.FindGameObjectWithTag("Player");
 
-		btnCanvasLeft.playerCont = player.GetComponent<Player_control>();
-		btnCanvasRigth.playerCont = player.GetComponent<Player_control>();
-		btnCanvasEspecial.playerCont = player.GetComponent<Player_control>();
-
 		mainCam.GetComponent<CameraMovement>().SetPlayer(player.transform);
 
 
@@ -122,10 +114,6 @@ public class GameController : MonoBehaviour {
 		
 		obj.transform.position = GameObject.FindGameObjectWithTag("PlayerStart").transform.position;
 		player = obj;
-
-		btnCanvasLeft.playerCont = player.GetComponent<Player_control>();
-		btnCanvasRigth.playerCont = player.GetComponent<Player_control>();
-		btnCanvasEspecial.playerCont = player.GetComponent<Player_control>();
 
 		mainCam.GetComponent<CameraMovement>().SetPlayer(player.transform);
 	}
@@ -360,9 +348,11 @@ public class GameController : MonoBehaviour {
 		
 
 		float randValue = Random.value;
-		if (randValue > .9f) // 45% of the time
+		if (randValue >= .95f) // 45% of the time
 		{
 			SpawRaio();
+		}else if(randValue >= .9 & randValue <.95){
+			SpawIma();
 		}else{
 			SpawEstrela();
 		}
@@ -384,6 +374,15 @@ public class GameController : MonoBehaviour {
 		spawPositionEstrela.y += Random.Range(2f, 5f);
 		spawPositionEstrela.x = Random.Range(-levalWidth, levalWidth);
 		Instantiate( itemRaio , spawPositionEstrela, Quaternion.identity );
+
+	}
+
+	public void SpawIma(){
+
+		Vector3 spawPositionEstrela = spawPosition;
+		spawPositionEstrela.y += Random.Range(2f, 5f);
+		spawPositionEstrela.x = Random.Range(-levalWidth, levalWidth);
+		Instantiate( itemIma , spawPositionEstrela, Quaternion.identity );
 
 	}
 
