@@ -87,6 +87,7 @@ public class GameController : MonoBehaviour {
 			PlayerPrefs.SetInt("primeiroJogo",1);
 			PlayerPrefs.SetInt("musica", 1);
 			PlayerPrefs.SetInt("som", 1);
+			PlayerServices.UnlockAnchievment(LittleJumpTaleServices.achievement_fist_jump);
 		}
 
 		GameObject obj = null;
