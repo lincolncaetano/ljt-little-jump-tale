@@ -263,7 +263,7 @@ public class GameController : MonoBehaviour {
 				scoreAnt = score;
 			}
 			
-			if(destroyer.transform.position.y + 20  > spawPosition.y){
+			if(player.transform.position.y + 20  > spawPosition.y){
 				SpawnPlataforma();
 			}
 

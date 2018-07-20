@@ -8,6 +8,7 @@ public class DestroyPlatformSript : MonoBehaviour {
 	private Transform player;           // Reference to the player's transform.
 	private Vector3 newPos;
 	private GameController gc;
+	private float timerUp = 0;
 
 	void Start(){
 		gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
@@ -20,9 +21,13 @@ public class DestroyPlatformSript : MonoBehaviour {
 	void FixedUpdate ()
 	{
 		if(player != null){	
-			if(player.position.y - 5.5f > transform.position.y){
-				Vector3 newPos = new Vector3(transform.position.x, player.position.y - 5.5f , transform.position.z);
-				transform.position = Vector3.Lerp(transform.position, newPos , smooth * Time.deltaTime);
+			if(gc.currentState == GameController.GameStates.InGame){
+				if(timerUp > 5){
+					Vector3 newPos = new Vector3(transform.position.x, transform.position.y + 1f , transform.position.z);
+					transform.position = Vector3.Lerp(transform.position, newPos , smooth * Time.deltaTime);
+				}else{
+					timerUp+= Time.deltaTime;
+				}
 			}
 		}
 	}
@@ -42,6 +47,7 @@ public class DestroyPlatformSript : MonoBehaviour {
 	public void Reset(){
 		Vector3 posicaoInicial = new Vector3(0, -4.94f, 0);
 		transform.position = posicaoInicial;
+		timerUp = 0f;
 	}
 
 }
