@@ -13,7 +13,9 @@ public class PlayerServices : MonoBehaviour {
 		PlayGamesPlatform.Activate();
 
 		Social.localUser.Authenticate(success =>{
-
+			if(GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().primeiroJogo == true){
+				PlayerServices.UnlockAnchievment(LittleJumpTaleServices.achievement_fist_jump);
+			}
 		});
 	}
 	
@@ -34,5 +36,13 @@ public class PlayerServices : MonoBehaviour {
 
 	public static void ShowAnchievment(){
 		Social.ShowAchievementsUI();
+	}
+
+	public static void PostScore(long score, string leaderBoard){
+		Social.ReportScore(score, leaderBoard, success => {});
+	}
+
+	public static void ShowLeaderBoard(){
+		PlayGamesPlatform.Instance.ShowLeaderboardUI(LittleJumpTaleServices.leaderboard_ranking);
 	}
 }

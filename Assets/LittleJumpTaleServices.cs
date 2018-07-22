@@ -26,6 +26,7 @@ public static class LittleJumpTaleServices
 {
         public const string achievement_collect_100_stars = "CgkI2cvV6pMbEAIQAg"; // <GPGSID>
         public const string achievement_fist_jump = "CgkI2cvV6pMbEAIQAQ"; // <GPGSID>
+        public const string leaderboard_ranking = "CgkI2cvV6pMbEAIQAw"; // <GPGSID>
 
 }
 

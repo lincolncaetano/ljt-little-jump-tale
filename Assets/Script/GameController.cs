@@ -73,6 +73,8 @@ public class GameController : MonoBehaviour {
 	public GameObject itemIma;
 	public GameObject destroyer;
 
+	public bool primeiroJogo = false;
+
 
 	void Start () {
 
@@ -83,11 +85,12 @@ public class GameController : MonoBehaviour {
 			PlayerPrefs.SetString("CharSelecionado", CharsScript.CharSelect.AdvGil.ToString());
 			PlayerPrefs.SetInt(SelectChar.prefixComprado+CharsScript.CharSelect.AdvGil.ToString(), 1);
 		}
+		
 		if(PlayerPrefs.GetInt("primeiroJogo") == 0){
 			PlayerPrefs.SetInt("primeiroJogo",1);
 			PlayerPrefs.SetInt("musica", 1);
 			PlayerPrefs.SetInt("som", 1);
-			PlayerServices.UnlockAnchievment(LittleJumpTaleServices.achievement_fist_jump);
+			primeiroJogo = true;
 		}
 
 		GameObject obj = null;
@@ -286,10 +289,13 @@ public class GameController : MonoBehaviour {
 
 				if(PlayerPrefs.GetInt("BestScore") < score){
 					PlayerPrefs.SetInt("BestScore", score);
+					PlayerServices.PostScore(score, LittleJumpTaleServices.leaderboard_ranking);
 				}
 
 				int totalScore = PlayerPrefs.GetInt("TotalScore") + score;
 				PlayerPrefs.SetInt("TotalScore", totalScore );
+
+				PlayerServices.IncrementAnchievment(LittleJumpTaleServices.achievement_collect_100_stars, score);
 
 
 				validaGameOver = false;
