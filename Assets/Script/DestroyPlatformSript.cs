@@ -34,8 +34,12 @@ public class DestroyPlatformSript : MonoBehaviour {
 					timerUp+= Time.deltaTime;
 				}
 
-				if(gc.score > 150){
+				if(gc.score > 50 && gc.score < 100 ){
 					velocidade = 1.7f;
+				}else if(gc.score > 100 && gc.score < 150){
+					velocidade = 1.95f;
+				}else if(gc.score > 150){
+					velocidade = 2.05f;
 				}
 			}
 		}
