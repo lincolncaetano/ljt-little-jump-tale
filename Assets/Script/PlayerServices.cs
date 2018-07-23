@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
+using UnityEngine.SocialPlatforms.GameCenter;
 
 public class PlayerServices : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().Build();
-		PlayGamesPlatform.InitializeInstance(config);
-		PlayGamesPlatform.Activate();
+
+		#if UNITY_ANDROID
+			PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().Build();
+			PlayGamesPlatform.InitializeInstance(config);
+			PlayGamesPlatform.Activate();
+		#else
+			GameCenterPlatform.ShowDefaultAchievementCompletionBanner(true);
+        #endif
+            
 
 		Social.localUser.Authenticate(success =>{
 			if(GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().primeiroJogo == true){
@@ -31,7 +38,10 @@ public class PlayerServices : MonoBehaviour {
 	}
 
 	public static void IncrementAnchievment(string id, int steps){
-		PlayGamesPlatform.Instance.IncrementAchievement(id, steps, successs =>{});
+		#if UNITY_ANDROID
+			PlayGamesPlatform.Instance.IncrementAchievement(id, steps, successs =>{});
+		#else
+        #endif
 	}
 
 	public static void ShowAnchievment(){
@@ -43,6 +53,10 @@ public class PlayerServices : MonoBehaviour {
 	}
 
 	public static void ShowLeaderBoard(){
-		PlayGamesPlatform.Instance.ShowLeaderboardUI(LittleJumpTaleServices.leaderboard_ranking);
+		#if UNITY_ANDROID
+			PlayGamesPlatform.Instance.ShowLeaderboardUI(LittleJumpTaleServices.leaderboard_ranking);
+		#else
+			Social.ShowLeaderboardUI();
+        #endif
 	}
 }

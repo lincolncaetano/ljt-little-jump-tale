@@ -23,7 +23,7 @@ public class DestroyPlatformSript : MonoBehaviour {
 		if(player != null){	
 			if(gc.currentState == GameController.GameStates.InGame){
 				if(timerUp > 5){
-					Vector3 newPos = new Vector3(transform.position.x, transform.position.y + 1f , transform.position.z);
+					Vector3 newPos = new Vector3(transform.position.x, transform.position.y + 1.3f , transform.position.z);
 					transform.position = Vector3.Lerp(transform.position, newPos , smooth * Time.deltaTime);
 				}else{
 					timerUp+= Time.deltaTime;

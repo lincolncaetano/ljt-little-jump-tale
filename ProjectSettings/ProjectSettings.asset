@@ -155,6 +155,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: br.com.linksdev.ljt
     Standalone: com.Company.ProductName
+    iOS: br.com.linksdev.ljt
   buildNumber: {}
   AndroidBundleVersionCode: 6
   AndroidMinSdkVersion: 16
