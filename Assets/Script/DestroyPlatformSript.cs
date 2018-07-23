@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DestroyPlatformSript : MonoBehaviour {
 
-	public float smooth = 1.5f;         // The relative speed at which the camera will catch up.
+	public float velocidade = 1.5f;         // The relative speed at which the camera will catch up.
 	private Transform player;           // Reference to the player's transform.
 	private Vector3 newPos;
 	private GameController gc;
@@ -22,9 +22,15 @@ public class DestroyPlatformSript : MonoBehaviour {
 	{
 		if(player != null){	
 			if(gc.currentState == GameController.GameStates.InGame){
-				if(timerUp > 5){
-					Vector3 newPos = new Vector3(transform.position.x, transform.position.y + 1.5f , transform.position.z);
-					transform.position = Vector3.Lerp(transform.position, newPos , smooth * Time.deltaTime);
+				if(timerUp > 3){
+					Vector3 newPos;
+					Debug.Log(player.position.y - transform.position.y);
+					if(player.position.y - transform.position.y > 10){
+						newPos = new Vector3(transform.position.x, player.position.y + 5f , transform.position.z);
+					}else{
+						newPos = new Vector3(transform.position.x, transform.position.y + velocidade , transform.position.z);
+					}
+					transform.position = Vector3.Lerp(transform.position, newPos , Time.deltaTime);
 				}else{
 					timerUp+= Time.deltaTime;
 				}
