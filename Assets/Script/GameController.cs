@@ -215,7 +215,7 @@ public class GameController : MonoBehaviour {
 		destroyer.GetComponent<DestroyPlatformSript>().Reset();
 		spawPosition = new Vector3();
 
-		cenario.transform.position = Vector3.zero;
+		//cenario.transform.position = Vector3.zero;
 		inicializaFase();
 
 		player.transform.position = GameObject.FindGameObjectWithTag("PlayerStart").transform.position;
