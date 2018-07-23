@@ -226,6 +226,13 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		if(currentState == GameStates.InGame){
+			Screen.sleepTimeout = SleepTimeout.NeverSleep;
+		}else{
+			Screen.sleepTimeout = SleepTimeout.SystemSetting;
+		}
+
 		txtScore.text = score.ToString();
 		if(PlayerPrefs.GetInt("musica") == 1){
 			audioS.enabled = true;
@@ -270,11 +277,6 @@ public class GameController : MonoBehaviour {
 			if(player.transform.position.y + 20  > spawPosition.y){
 				SpawnPlataforma();
 			}
-
-
-
-		}else if(currentState == GameStates.InPause){
-			
 		}else if(currentState == GameStates.GameOver){
 
 			//audioS.Stop();
