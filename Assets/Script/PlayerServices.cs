@@ -4,6 +4,7 @@ using UnityEngine;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 using UnityEngine.SocialPlatforms.GameCenter;
+using UnityEngine.SocialPlatforms;
 
 public class PlayerServices : MonoBehaviour {
 
@@ -41,6 +42,16 @@ public class PlayerServices : MonoBehaviour {
 		#if UNITY_ANDROID
 			PlayGamesPlatform.Instance.IncrementAchievement(id, steps, successs =>{});
 		#else
+			Social.LoadAchievements( achievements => {
+				foreach (IAchievement achievement in achievements)
+				{
+					if(achievement.id == id){
+						if(LittleJumpTaleServices.achievement_collect_100_stars == id){
+							Social.ReportProgress(id, achievement.percentCompleted + steps, success =>{});
+						}
+					}
+				}
+			});
         #endif
 	}
 
