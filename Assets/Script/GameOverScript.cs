@@ -34,7 +34,10 @@ public class GameOverScript : MonoBehaviour {
 
         if(gc.currentState == GameController.GameStates.GameOver){
             if (interstitial!= null == interstitial.IsLoaded()) {
-                interstitial.Show();
+                float x = UnityEngine.Random.Range(0, 1f);
+                if(x < 0.75f){
+                    interstitial.Show();
+                }
             }
         }
 

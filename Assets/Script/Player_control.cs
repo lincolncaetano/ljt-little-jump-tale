@@ -133,6 +133,7 @@ public class Player_control : MonoBehaviour {
         transform.rotation = Quaternion.Euler(0,0,0);
 		usoSpeceial = 1;
 		validaGameOver = true;
+		timeIma = 0f;
 	}
 
 
