@@ -76,7 +76,12 @@ public class GameController : MonoBehaviour {
 	public bool primeiroJogo = false;
 	private float timerWatting = 0f;
 
+	Camera cam;
 	void Start () {
+		
+		cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+		levalWidth = Camera.main.ScreenToWorldPoint(new Vector3(cam.pixelWidth, 0, 5)).x;
+		
 
 		charsManager = GameObject.FindGameObjectWithTag(CharsScript.tag).GetComponent<CharsScript>();
 		//	PlayerPrefs.DeleteAll();
