@@ -74,7 +74,7 @@ public class GameController : MonoBehaviour {
 	public GameObject destroyer;
 
 	public bool primeiroJogo = false;
-
+	private float timerWatting = 0f;
 
 	void Start () {
 
@@ -252,18 +252,22 @@ public class GameController : MonoBehaviour {
 		if(currentState == GameStates.Menu){
 			
 		
-		}else if(currentState == GameStates.Watting){
-
-			
+		}else if(currentState == GameStates.Watting){			
 			if(!audioS.isPlaying){
 				audioS.Play();
 			}
 
+			if(timerWatting > 3){
+				currentState = GameController.GameStates.InGame;
+				Rigidbody2D rigi = player.GetComponent<Rigidbody2D>();
+				if(rigi != null){
+					Vector2 velocity = rigi.velocity;
+					velocity.y = 12;
+					rigi.velocity = velocity;
+				}
+			}
+			timerWatting+= Time.deltaTime;
 
-			//health.fillAmount = amout /20;
-			//health.color = Color.white;
-
-		
 		}else if(currentState == GameStates.InGame){
 
 			if(!player.GetComponent<Player_control>().especial){
@@ -407,14 +411,18 @@ public class GameController : MonoBehaviour {
 		score++;
 	}
 
+	private int partidas = 0;
 	public void BtnWatting(){
-		currentState = GameStates.InGame;
-
-		Rigidbody2D rigi = player.GetComponent<Rigidbody2D>();
-		if(rigi != null){
-			Vector2 velocity = rigi.velocity;
-			velocity.y = 12;
-			rigi.velocity = velocity;
+		if(partidas < 2 ){
+			currentState = GameStates.Watting;
+		}else{
+			currentState = GameStates.InGame;
+			Rigidbody2D rigi = player.GetComponent<Rigidbody2D>();
+			if(rigi != null){
+				Vector2 velocity = rigi.velocity;
+				velocity.y = 12;
+				rigi.velocity = velocity;
+			}
 		}
 	}
 
