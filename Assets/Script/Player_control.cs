@@ -164,7 +164,12 @@ public class Player_control : MonoBehaviour {
         if(col.gameObject.tag == "Plataforma"){
 			if(col.relativeVelocity.y > 0f){
 				anim.SetTrigger("jump");
+				audio.PlayOneShot(audioGoomo);
 			}
 		}
     }
+
+	public void playSpecial(){
+		audio.PlayOneShot(audioSpecial);
+	}
 }

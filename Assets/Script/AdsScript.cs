@@ -9,7 +9,7 @@ public class AdsScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 #if UNITY_ANDROID
-        string appId = "ca-app-pub-3940256099942544~3347511713";
+        string appId = "ca-app-pub-4896657111169099~6669255870";
 #elif UNITY_IPHONE
         string appId = "ca-app-pub-4896657111169099~8693687948";
 #else
@@ -36,9 +36,9 @@ public class AdsScript : MonoBehaviour {
 #if UNITY_EDITOR
         string adUnitId = "";
 #elif UNITY_ANDROID
-        string adUnitId = "ca-app-pub-3940256099942544/6300978111";
+        string adUnitId = "ca-app-pub-4896657111169099/4837299458";
 #elif UNITY_IPHONE
-        string adUnitId = "ca-app-pub-3940256099942544/2934735716";
+        string adUnitId = "ca-app-pub-4896657111169099/4143659726";
 #else
         string adUnitId = "unexpected_platform";
 #endif
@@ -66,12 +66,6 @@ public class AdsScript : MonoBehaviour {
 	private AdRequest CreateAdRequest()
     {
         return new AdRequest.Builder()
-            .AddTestDevice(AdRequest.TestDeviceSimulator)
-            .AddTestDevice("0123456789ABCDEF0123456789ABCDEF")
-            .AddKeyword("game")
-            .SetGender(Gender.Male)
-            .SetBirthday(new DateTime(1985, 1, 1))
-            .TagForChildDirectedTreatment(false)
             .AddExtra("color_bg", "9B30FF")
             .Build();
     }

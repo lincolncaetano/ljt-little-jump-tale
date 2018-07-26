@@ -69,9 +69,9 @@ public class GameOverScript : MonoBehaviour {
 
     private void VideoRequest2xScore(){
         #if UNITY_ANDROID
-            string adUnitId = "ca-app-pub-3940256099942544/5224354917";
+            string adUnitId = "ca-app-pub-4896657111169099/3092030995";
         #elif UNITY_IPHONE
-            string adUnitId = "ca-app-pub-3940256099942544/1712485313";
+            string adUnitId = "ca-app-pub-4896657111169099/2478815145";
         #else
             string adUnitId = "unexpected_platform";
         #endif
@@ -105,9 +105,9 @@ public class GameOverScript : MonoBehaviour {
 
     private void VideoRequest5Gemas(){
         #if UNITY_ANDROID
-            string adUnitId = "ca-app-pub-3940256099942544/5224354917";
+            string adUnitId = "ca-app-pub-4896657111169099/5357078167";
         #elif UNITY_IPHONE
-            string adUnitId = "ca-app-pub-3940256099942544/1712485313";
+            string adUnitId = "ca-app-pub-4896657111169099/1904100070";
         #else
             string adUnitId = "unexpected_platform";
         #endif
@@ -123,9 +123,9 @@ public class GameOverScript : MonoBehaviour {
     {
 
         #if UNITY_ANDROID
-            string adUnitId = "ca-app-pub-3940256099942544/1033173712";
+            string adUnitId = "ca-app-pub-4896657111169099/6586399351";
         #elif UNITY_IPHONE
-            string adUnitId = "ca-app-pub-3940256099942544/4411468910";
+            string adUnitId = "ca-app-pub-4896657111169099/4558183576";
         #else
             string adUnitId = "unexpected_platform";
         #endif

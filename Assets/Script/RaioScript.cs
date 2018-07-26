@@ -9,6 +9,7 @@ public class RaioScript : MonoBehaviour {
     {
 		if(col.tag == "Player"){
 			col.GetComponent<Player_control>().timeRaio = 2f;
+			col.GetComponent<Player_control>().playSpecial();
 			Rigidbody2D rigi = col.GetComponent<Rigidbody2D>();
 			if(rigi != null){
 				Vector2 velocity = rigi.velocity;

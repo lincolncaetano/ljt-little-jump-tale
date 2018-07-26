@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GooglePlayGames;
-using GooglePlayGames.BasicApi;
-using UnityEngine.SocialPlatforms.GameCenter;
+#if UNITY_ANDROID
+	using GooglePlayGames;
+	using GooglePlayGames.BasicApi;
+#else
+	using UnityEngine.SocialPlatforms.GameCenter;
+#endif
 using UnityEngine.SocialPlatforms;
 
 public class PlayerServices : MonoBehaviour {
