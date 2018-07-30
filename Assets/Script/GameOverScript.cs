@@ -134,6 +134,8 @@ public class GameOverScript : MonoBehaviour {
         interstitial = new InterstitialAd(adUnitId);
 
         interstitial.OnAdFailedToLoad += HandleOnAdFailedToLoad;
+        interstitial.OnAdClosed += HandleOnAdClosed;
+
 
         RequestInterstitial();
     }
@@ -148,6 +150,12 @@ public class GameOverScript : MonoBehaviour {
     private void HandleOnAdFailedToLoad(object sender, AdFailedToLoadEventArgs args){
         RequestInterstitial();
     }
+
+    public void HandleOnAdClosed(object sender, EventArgs args)
+    {
+        RequestInterstitial();
+    }
+
 
 
     public void play2X(){
