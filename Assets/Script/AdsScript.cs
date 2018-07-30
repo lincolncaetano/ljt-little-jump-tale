@@ -43,7 +43,6 @@ public class AdsScript : MonoBehaviour {
         string adUnitId = "unexpected_platform";
 #endif
 
-        // Clean up banner ad before creating a new one.
         if (this.bannerView != null)
         {
             this.bannerView.Destroy();
@@ -65,19 +64,17 @@ public class AdsScript : MonoBehaviour {
 
 	private AdRequest CreateAdRequest()
     {
-        return new AdRequest.Builder()
-            .AddExtra("color_bg", "9B30FF")
-            .Build();
+        return new AdRequest.Builder().Build();
     }
 
     public void HandleAdLoaded(object sender, EventArgs args)
     {
-        MonoBehaviour.print("HandleAdLoaded event received");
+        
     }
 
     public void HandleAdFailedToLoad(object sender, AdFailedToLoadEventArgs args)
     {
-        MonoBehaviour.print("HandleFailedToReceiveAd event received with message: " + args.Message);
+        RequestBanner();
     }
 
     public void HandleAdOpened(object sender, EventArgs args)
@@ -87,7 +84,7 @@ public class AdsScript : MonoBehaviour {
 
     public void HandleAdClosed(object sender, EventArgs args)
     {
-        MonoBehaviour.print("HandleAdClosed event received");
+       RequestBanner();
     }
 
     public void HandleAdLeftApplication(object sender, EventArgs args)
