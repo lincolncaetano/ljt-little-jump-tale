@@ -262,7 +262,7 @@ public class GameController : MonoBehaviour {
 				audioS.Play();
 			}
 
-			if(timerWatting > 3){
+			if(timerWatting > 1.5){
 				currentState = GameController.GameStates.InGame;
 				Rigidbody2D rigi = player.GetComponent<Rigidbody2D>();
 				if(rigi != null){
