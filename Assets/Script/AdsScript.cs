@@ -30,7 +30,7 @@ public class AdsScript : MonoBehaviour {
 		
 	}
 
-	private void RequestBanner()
+	public void RequestBanner()
     {
         // These ad units are configured to always serve test ads.
 #if UNITY_EDITOR
@@ -69,7 +69,7 @@ public class AdsScript : MonoBehaviour {
 
     public void HandleAdLoaded(object sender, EventArgs args)
     {
-        
+        this.bannerView.Show();
     }
 
     public void HandleAdFailedToLoad(object sender, AdFailedToLoadEventArgs args)

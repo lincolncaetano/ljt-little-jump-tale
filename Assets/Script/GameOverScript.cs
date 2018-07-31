@@ -176,6 +176,7 @@ public class GameOverScript : MonoBehaviour {
         ConfigureRequestInterstitial();
         VideoRequest2xScore();
         VideoRequest5Gemas();
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<AdsScript>().RequestBanner();
     }
 
     public void HandleRewardVideo2xLoaded(object sender, EventArgs args)
