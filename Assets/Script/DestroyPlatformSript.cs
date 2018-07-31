@@ -24,7 +24,7 @@ public class DestroyPlatformSript : MonoBehaviour {
 			if(gc.currentState == GameController.GameStates.InGame){
 				if(timerUp > 3){
 					Vector3 newPos;
-					if(player.transform.position.y - transform.position.y > 10){
+					if(player.transform.position.y - transform.position.y > 20){
 						newPos = new Vector3(transform.position.x, player.transform.position.y + 5f , transform.position.z);
 					}else{
 						newPos = new Vector3(transform.position.x, transform.position.y + velocidade , transform.position.z);
