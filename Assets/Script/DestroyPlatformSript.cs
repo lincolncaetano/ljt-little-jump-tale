@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DestroyPlatformSript : MonoBehaviour {
 
@@ -21,7 +22,7 @@ public class DestroyPlatformSript : MonoBehaviour {
 	void FixedUpdate ()
 	{
 		if(player != null){	
-			if(gc.currentState == GameController.GameStates.InGame){
+			if(gc.currentState == GameController.GameStates.InGame && gc.cenaEgg == false){
 				if(timerUp > 3){
 					Vector3 newPos;
 					if(player.transform.position.y - transform.position.y > 20){
@@ -47,7 +48,12 @@ public class DestroyPlatformSript : MonoBehaviour {
 	 void OnTriggerEnter2D(Collider2D col)
     {	
 		if(col.gameObject.tag.Equals("Player")){
-			gc.currentState = GameController.GameStates.GameOver;
+			if(player.GetComponent<Player_control>().timeImune > 0){
+				GameObject.FindGameObjectWithTag("CenaEgg").SetActive(true);
+				GameObject.FindGameObjectWithTag("CenaEgg").GetComponent<ScenneEggScript>().StartEgg();
+			}else{
+				gc.currentState = GameController.GameStates.GameOver;
+			}
 		}else if(col.GetComponent<ScripPlataforma>()!= null && !col.GetComponent<ScripPlataforma>().inicio){
 			Destroy(col.gameObject);
 		}

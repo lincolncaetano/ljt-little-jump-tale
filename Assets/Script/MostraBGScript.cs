@@ -16,8 +16,12 @@ public class MostraBGScript : MonoBehaviour {
 	void Update () {
 		for (int i = 0; i < listaBG.Length; i++)
 		{
-			if(gc.nCenario == i){
-				listaBG[i].SetActive(true);
+			if(gc.cenaEgg != true){
+				if(gc.nCenario == i){
+					listaBG[i].SetActive(true);
+				}else{
+					listaBG[i].SetActive(false);
+				}
 			}else{
 				listaBG[i].SetActive(false);
 			}

@@ -5,6 +5,7 @@ public class itemColl : MonoBehaviour {
 
 	
 	public GameController controller;
+	public bool estrelaEgg = false;
 
 	void Start(){
 		controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
@@ -16,6 +17,10 @@ public class itemColl : MonoBehaviour {
 			if(other.tag == "Player"){
 				Destroy(this.gameObject);
 				controller.AddContScore();
+				if(estrelaEgg){
+					Player_control player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_control>();
+					player.timeImune = 5;
+				}
 			}
 		}
 

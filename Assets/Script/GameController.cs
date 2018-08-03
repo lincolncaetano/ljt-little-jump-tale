@@ -76,6 +76,8 @@ public class GameController : MonoBehaviour {
 	public bool primeiroJogo = false;
 	private float timerWatting = 0f;
 
+	public bool cenaEgg;
+
 	Camera cam;
 	void Start () {
 		
@@ -376,13 +378,17 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	int contEstrela = 0;
 	public void SpawEstrela(){
-
+		contEstrela++;
 		Vector3 spawPositionEstrela = spawPosition;
 		
 		spawPositionEstrela.y += Random.Range(2f, 5f);
 		spawPositionEstrela.x = Random.Range(-levalWidth, levalWidth);
-		Instantiate( itemEstrela , spawPositionEstrela, Quaternion.identity );
+		GameObject estrela = Instantiate( itemEstrela , spawPositionEstrela, Quaternion.identity );
+		if(contEstrela == 89){
+			estrela.GetComponent<itemColl>().estrelaEgg = true;
+		}
 
 	}
 

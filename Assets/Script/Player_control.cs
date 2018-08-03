@@ -54,8 +54,8 @@ public class Player_control : MonoBehaviour {
         #elif UNITY_IPHONE
             moviment = Input.acceleration.x * movimentSpeed;
         #else
-            moviment = Input.GetAxis("Horizontal") * movimentSpeed;
         #endif
+            moviment = Input.GetAxis("Horizontal") * movimentSpeed;
 
 		
         
@@ -113,6 +113,7 @@ public class Player_control : MonoBehaviour {
 
 			 AtivaRaio();
 			 AtivaIma();
+			 AtivaImune();
         }
         //float h = moviment;
     }
@@ -129,6 +130,7 @@ public class Player_control : MonoBehaviour {
 
 	public void ResetPlayer(){
 		anim.SetBool("dead", false);
+		ima.SetActive(false);
 		left = true;
         transform.rotation = Quaternion.Euler(0,0,0);
 		usoSpeceial = 1;
@@ -156,6 +158,13 @@ public class Player_control : MonoBehaviour {
 			timeIma -= Time.deltaTime;
 		}else{
 			ima.SetActive(false);
+		}
+	}
+
+	public float timeImune;
+	private void AtivaImune(){
+		if(timeImune > 0f){
+			timeImune -= Time.deltaTime;
 		}
 	}
 

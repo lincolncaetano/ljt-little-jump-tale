@@ -12,6 +12,8 @@ TagManager:
   - Curva
   - ValorChar
   - CharManager
+  - PlayerStartEgg
+  - CenaEgg
   layers:
   - Default
   - TransparentFX
