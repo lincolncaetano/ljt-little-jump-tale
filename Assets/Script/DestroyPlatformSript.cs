@@ -41,6 +41,8 @@ public class DestroyPlatformSript : MonoBehaviour {
 					velocidade = 1.95f;
 				}else if(gc.score > 150){
 					velocidade = 2.05f;
+				}else if(gc.score > 225){
+					velocidade = 2.5f;
 				}
 			}
 		}
