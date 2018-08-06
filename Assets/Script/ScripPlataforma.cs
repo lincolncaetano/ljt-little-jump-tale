@@ -13,6 +13,7 @@ public class ScripPlataforma : MonoBehaviour {
 
 	private float jumpForce = 12f;
 	public bool inicio = false;
+	private bool pulou = false;
 
 	void Start(){
 		gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
@@ -27,6 +28,7 @@ public class ScripPlataforma : MonoBehaviour {
 				Vector2 velocity = rigi.velocity;
 				velocity.y = jumpForce;
 				rigi.velocity = velocity;
+				pulou = true;
 			}
 		}
     }
@@ -35,8 +37,9 @@ public class ScripPlataforma : MonoBehaviour {
     {
 		if(gc.currentState == GameController.GameStates.InGame){
 			Rigidbody2D rigi = col.collider.GetComponent<Rigidbody2D>();
-			if(rigi != null){
+			if(rigi != null && pulou){
 				col.gameObject.GetComponent<Animator>().SetBool("jump", true);
+				pulou = false;
 			}
 		}
     }

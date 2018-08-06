@@ -62,7 +62,7 @@ public class DestroyPlatformSript : MonoBehaviour {
 					GameObject.FindGameObjectWithTag("CenaEgg").GetComponent<ScenneEggScript>().StartEgg();
 				}else{
 					gc.currentState = GameController.GameStates.Offertas;
-					player.GetComponent<PlayerController>().AudioLose();
+					player.GetComponent<Player_control>().AudioLose();
 				}
 			}
 		}else if(col.GetComponent<ScripPlataforma>()!= null && !col.GetComponent<ScripPlataforma>().inicio){
