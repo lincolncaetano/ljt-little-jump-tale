@@ -104,8 +104,8 @@ public class GameController : MonoBehaviour {
 
 		
 		if(obj == null){
-			//obj = Instantiate(charsManager.retornoChar(PlayerPrefs.GetString("CharSelecionado"))) as GameObject;
-			obj = Instantiate(charsManager.retornoChar(CharsScript.CharSelect.Ibisen.ToString())) as GameObject;
+			obj = Instantiate(charsManager.retornoChar(PlayerPrefs.GetString("CharSelecionado"))) as GameObject;
+			//obj = Instantiate(charsManager.retornoChar(CharsScript.CharSelect.Ibisen.ToString())) as GameObject;
 		}
 
 
