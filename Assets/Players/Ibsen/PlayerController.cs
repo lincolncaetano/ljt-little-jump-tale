@@ -54,8 +54,8 @@ public class PlayerController : MonoBehaviour {
         #elif UNITY_IPHONE
             moviment = Input.acceleration.x * movimentSpeed;
         #else
-        #endif
             moviment = Input.GetAxis("Horizontal") * movimentSpeed;
+        #endif
 
 		
         
