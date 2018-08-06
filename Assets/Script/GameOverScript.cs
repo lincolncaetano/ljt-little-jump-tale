@@ -31,16 +31,17 @@ public class GameOverScript : MonoBehaviour {
     void Update () {
         txtScoreTotal.text = PlayerPrefs.GetInt("TotalScore").ToString();
         txtGemaTotal.text = PlayerPrefs.GetInt("TotalGema").ToString();
+    }
 
-        if(gc.currentState == GameController.GameStates.GameOver){
-            if (interstitial!= null == interstitial.IsLoaded()) {
-                float x = UnityEngine.Random.Range(0, 1f);
-                if(x < 0.75f){
-                    interstitial.Show();
-                }
+    public void goGameOver()
+    {
+        gc.currentState = GameController.GameStates.GameOver;
+        if (interstitial!= null == interstitial.IsLoaded()) {
+            float x = UnityEngine.Random.Range(0, 1f);
+            if(x < 0.75f){
+                interstitial.Show();
             }
         }
-
     }
 
     public void ConfigureVideoRequest2xScore(){

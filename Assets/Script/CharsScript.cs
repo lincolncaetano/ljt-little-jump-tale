@@ -6,8 +6,8 @@ public class CharsScript : MonoBehaviour{
 	
 	public static string tag = "CharManager";
 	public GameObject[] chars;
-	public Player[] listaChars = new Player[]{advGirl,advBoy,cat,dog,cavaleiro,dino,ninjaBoy,ninjaGirl,jack,noel,robo,cuteGirl,zBoy,zGirl};
-	public enum CharSelect{AdvGil,AdvBoy,Cat,Dog,Cavaleiro,Dino,NinjaBoy,NinjaGirl,Jack,Noel,Robo,CuteGirl,ZBoy,ZGirl};
+	public Player[] listaChars = new Player[]{advGirl,advBoy,cat,dog,cavaleiro,dino,ninjaBoy,ninjaGirl,jack,noel,robo,cuteGirl,zBoy,zGirl,ibisen};
+	public enum CharSelect{AdvGil,AdvBoy,Cat,Dog,Cavaleiro,Dino,NinjaBoy,NinjaGirl,Jack,Noel,Robo,CuteGirl,ZBoy,ZGirl,Ibisen};
 	public enum TipoMoeda{Estrela, Gemma, Dinheiro};
 
 	public static Player advGirl = new Player(CharSelect.AdvGil.ToString(), TipoMoeda.Estrela, 200);
@@ -24,6 +24,7 @@ public class CharsScript : MonoBehaviour{
 	public static Player cuteGirl = new Player(CharSelect.CuteGirl.ToString(), TipoMoeda.Gemma, 125);
 	public static Player zBoy = new Player(CharSelect.ZBoy.ToString(), TipoMoeda.Gemma, 350);
 	public static Player zGirl = new Player(CharSelect.ZGirl.ToString(), TipoMoeda.Gemma, 350);
+	public static Player ibisen = new Player(CharSelect.Ibisen.ToString(), TipoMoeda.Gemma, 350);
 
 
 	public GameObject retornoChar(string id){

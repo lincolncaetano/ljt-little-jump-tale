@@ -18,8 +18,14 @@ public class itemColl : MonoBehaviour {
 				Destroy(this.gameObject);
 				controller.AddContScore();
 				if(estrelaEgg){
-					Player_control player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_control>();
-					player.timeImune = 5;
+					
+					if(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>() != null){
+						PlayerController player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+						player.timeImune = 5;
+					}else{
+						Player_control player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_control>();
+						player.timeImune = 5;
+					}
 				}
 			}
 		}

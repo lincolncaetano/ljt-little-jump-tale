@@ -48,11 +48,22 @@ public class DestroyPlatformSript : MonoBehaviour {
 	 void OnTriggerEnter2D(Collider2D col)
     {	
 		if(col.gameObject.tag.Equals("Player")){
-			if(player.GetComponent<Player_control>().timeImune > 0){
-				GameObject.FindGameObjectWithTag("CenaEgg").SetActive(true);
-				GameObject.FindGameObjectWithTag("CenaEgg").GetComponent<ScenneEggScript>().StartEgg();
+			if(player.GetComponent<PlayerController>() != null){
+				if(player.GetComponent<PlayerController>().timeImune > 0){
+					GameObject.FindGameObjectWithTag("CenaEgg").SetActive(true);
+					GameObject.FindGameObjectWithTag("CenaEgg").GetComponent<ScenneEggScript>().StartEgg();
+				}else{
+					gc.currentState = GameController.GameStates.Offertas;
+					player.GetComponent<PlayerController>().AudioLose();
+				}
 			}else{
-				gc.currentState = GameController.GameStates.GameOver;
+				if(player.GetComponent<Player_control>().timeImune > 0){
+					GameObject.FindGameObjectWithTag("CenaEgg").SetActive(true);
+					GameObject.FindGameObjectWithTag("CenaEgg").GetComponent<ScenneEggScript>().StartEgg();
+				}else{
+					gc.currentState = GameController.GameStates.Offertas;
+					player.GetComponent<PlayerController>().AudioLose();
+				}
 			}
 		}else if(col.GetComponent<ScripPlataforma>()!= null && !col.GetComponent<ScripPlataforma>().inicio){
 			Destroy(col.gameObject);

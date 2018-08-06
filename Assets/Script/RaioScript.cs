@@ -8,8 +8,14 @@ public class RaioScript : MonoBehaviour {
 	 void OnTriggerEnter2D(Collider2D col)
     {
 		if(col.tag == "Player"){
-			col.GetComponent<Player_control>().timeRaio = 2f;
-			col.GetComponent<Player_control>().playSpecial();
+			
+			if(col.GetComponent<PlayerController>() != null){
+				col.GetComponent<PlayerController>().timeRaio = 2f;
+				col.GetComponent<PlayerController>().playSpecial();
+			}else{
+				col.GetComponent<Player_control>().timeRaio = 2f;
+				col.GetComponent<Player_control>().playSpecial();
+			}
 			Rigidbody2D rigi = col.GetComponent<Rigidbody2D>();
 			if(rigi != null){
 				Vector2 velocity = rigi.velocity;

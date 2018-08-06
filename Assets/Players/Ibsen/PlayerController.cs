@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class Player_control : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
 
 	public Animator anim;
 	private Animator animSpecial;
@@ -40,7 +40,7 @@ public class Player_control : MonoBehaviour {
         usoSpeceial = 1;
 	}
 
-	
+	 public Vector2 direction;
 	void Update () {
 
 		if(PlayerPrefs.GetInt("som") == 1){
@@ -67,7 +67,7 @@ public class Player_control : MonoBehaviour {
         }
 
 		if(controller.currentState == GameController.GameStates.InGame){
-           
+            
 		}
 
 		if(controller.currentState == GameController.GameStates.Watting){
@@ -117,10 +117,6 @@ public class Player_control : MonoBehaviour {
         //float h = moviment;
     }
 
-	public void AudioLose(){
-		audio.PlayOneShot(audioOps);
-	}
-
 	void Flip()
     {
         facingRight = !facingRight;
@@ -129,6 +125,9 @@ public class Player_control : MonoBehaviour {
         transform.localScale = theScale;
     }
 
+	public void AudioLose(){
+		audio.PlayOneShot(audioOps);
+	}
 
 
 	public void ResetPlayer(){
@@ -177,7 +176,7 @@ public class Player_control : MonoBehaviour {
     {
         if(col.gameObject.tag == "Plataforma"){
 			if(col.relativeVelocity.y > 0f){
-				//anim.SetTrigger("jump");
+				anim.SetBool("jump", false);
 				audio.PlayOneShot(audioGoomo);
 			}
 		}
@@ -185,5 +184,9 @@ public class Player_control : MonoBehaviour {
 
 	public void playSpecial(){
 		audio.PlayOneShot(audioSpecial);
+	}
+
+	public void onLanding(){
+		anim.SetBool("jump", false);
 	}
 }

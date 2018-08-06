@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour {
 	public GameObject mainCam;
 
 	public GameStates currentState;
-	public enum GameStates{Menu, Watting, InGame, InPause, GameOver, Shop};
+	public enum GameStates{Menu, Watting, InGame, InPause, Offertas, GameOver, Shop};
 
 	public int score = 0;
 	public int scoreAnt = -1;
@@ -104,7 +104,8 @@ public class GameController : MonoBehaviour {
 
 		
 		if(obj == null){
-			obj = Instantiate(charsManager.retornoChar(PlayerPrefs.GetString("CharSelecionado"))) as GameObject;
+			//obj = Instantiate(charsManager.retornoChar(PlayerPrefs.GetString("CharSelecionado"))) as GameObject;
+			obj = Instantiate(charsManager.retornoChar(CharsScript.CharSelect.Ibisen.ToString())) as GameObject;
 		}
 
 
@@ -210,7 +211,11 @@ public class GameController : MonoBehaviour {
 		validaGameOver = true;
 
 
-		GameObject.FindGameObjectWithTag("Player").GetComponent<Player_control>().ResetPlayer();
+		if(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>() != null ){
+			GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().ResetPlayer();
+		}else{
+			GameObject.FindGameObjectWithTag("Player").GetComponent<Player_control>().ResetPlayer();
+		}
 
 		foreach(GameObject plataforma in GameObject.FindGameObjectsWithTag("Plataforma")){
 			Destroy(plataforma);
