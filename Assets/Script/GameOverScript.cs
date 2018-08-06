@@ -29,7 +29,7 @@ public class GameOverScript : MonoBehaviour {
         ConfigureRequestInterstitial();
     }
     void Update () {
-        txtScoreTotal.text = PlayerPrefs.GetInt("TotalScore").ToString();
+        txtScoreTotal.text = gc.score.ToString();
         txtGemaTotal.text = PlayerPrefs.GetInt("TotalGema").ToString();
     }
 

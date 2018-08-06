@@ -24,7 +24,6 @@ public class ScripPlataforma : MonoBehaviour {
 		if(gc.currentState == GameController.GameStates.InGame && col.relativeVelocity.y <= 0f){
 			Rigidbody2D rigi = col.collider.GetComponent<Rigidbody2D>();
 			if(rigi != null){
-				Debug.Log("aquiiiiii");
 				Vector2 velocity = rigi.velocity;
 				velocity.y = jumpForce;
 				rigi.velocity = velocity;

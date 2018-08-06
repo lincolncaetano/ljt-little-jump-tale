@@ -60,7 +60,9 @@ public class TranslatorController : MonoBehaviour
 
 	public void Update()
 	{
-		Debug.Log(SelectedLanguage == "English");
+		if(translateText == null){
+			translateText = GetComponentInChildren<Text> ();
+		}
 		
 		// If no language is selected, select the 'DefaultLanguage'
 		//if(SelectedLanguage == "")
