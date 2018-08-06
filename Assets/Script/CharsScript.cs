@@ -24,7 +24,7 @@ public class CharsScript : MonoBehaviour{
 	public static Player cuteGirl = new Player(CharSelect.CuteGirl.ToString(), TipoMoeda.Gemma, 125);
 	public static Player zBoy = new Player(CharSelect.ZBoy.ToString(), TipoMoeda.Gemma, 350);
 	public static Player zGirl = new Player(CharSelect.ZGirl.ToString(), TipoMoeda.Gemma, 350);
-	public static Player ibisen = new Player(CharSelect.Ibisen.ToString(), TipoMoeda.Gemma, 350);
+	public static Player ibisen = new Player(CharSelect.Ibisen.ToString(), TipoMoeda.Gemma, 20);
 
 
 	public GameObject retornoChar(string id){
