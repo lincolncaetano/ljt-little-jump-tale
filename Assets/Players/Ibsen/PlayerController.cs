@@ -132,6 +132,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void ResetPlayer(){
 		anim.SetBool("dead", false);
+		anim.SetBool("jump", false);
 		ima.SetActive(false);
 		left = true;
         transform.rotation = Quaternion.Euler(0,0,0);

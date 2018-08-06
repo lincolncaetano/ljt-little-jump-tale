@@ -111,6 +111,10 @@ public class SelectChar : MonoBehaviour {
 				if(imgChar != null){
 					imgChar.color = Color.white;
 				}
+				for (int i = 0; i < transform.Find("ImgChar").GetChildCount(); i++)
+				{
+					 transform.Find("ImgChar").GetChild(i).gameObject.GetComponent<Image>().color = Color.white;
+				}
 			}
 		}
 	}

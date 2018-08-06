@@ -393,6 +393,7 @@ public class GameController : MonoBehaviour {
 		GameObject estrela = Instantiate( itemEstrela , spawPositionEstrela, Quaternion.identity );
 		if(contEstrela == 89){
 			estrela.GetComponent<itemColl>().estrelaEgg = true;
+			estrela.GetComponent<SpriteRenderer>().color = new Color(6,0,174);
 		}
 
 	}
