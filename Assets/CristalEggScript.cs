@@ -23,7 +23,7 @@ public class CristalEggScript : MonoBehaviour {
 				controller.AddContScore();
 				int total = PlayerPrefs.GetInt("TotalGema");
 				fogos.SetActive(true);
-        		PlayerPrefs.SetInt("TotalGema", total + 5);
+        		PlayerPrefs.SetInt("TotalGema", total + 25);
 				PlayerPrefs.SetInt("Egg1Idade", 1);
 				PlayerServices.UnlockAnchievment(LittleJumpTaleServices.achievement_1__easter_egg);
 			}

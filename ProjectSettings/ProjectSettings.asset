@@ -158,7 +158,7 @@ PlayerSettings:
     iOS: br.com.linksdev.ljt
   buildNumber:
     iOS: 13
-  AndroidBundleVersionCode: 13
+  AndroidBundleVersionCode: 15
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
