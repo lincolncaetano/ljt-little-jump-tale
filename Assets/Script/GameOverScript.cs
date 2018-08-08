@@ -16,14 +16,13 @@ public class GameOverScript : MonoBehaviour {
 
     private RewardBasedVideoAd rewardVideo2x;
     private RewardBasedVideoAd rewardVideo5Gemas;
+    private bool isPlay2x = true;
+    private bool isPlay5Gemas = true;
 
     
 
     void Start(){
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-
-        this.btnPlay2X.GetComponent<Button>().interactable = false;  
-        this.btnPlay5Gemas.GetComponent<Button>().interactable = false;
 
         ConfigureVideoRequest2xScore();
         ConfigureVideoRequest5Gemas();
@@ -32,6 +31,19 @@ public class GameOverScript : MonoBehaviour {
     void Update () {
         txtScoreTotal.text = gc.score.ToString();
         txtGemaTotal.text = PlayerPrefs.GetInt("TotalGema").ToString();
+
+        if(isPlay2x && rewardVideo2x.IsLoaded()){
+            btnPlay2X.GetComponent<Button>().interactable = true;
+        }else{
+            btnPlay2X.GetComponent<Button>().interactable = false;
+        }
+
+        if(isPlay5Gemas && rewardVideo2x.IsLoaded()){
+            btnPlay5Gemas.GetComponent<Button>().interactable = true;
+        }else{
+            btnPlay5Gemas.GetComponent<Button>().interactable = false;
+        }
+
     }
 
     public void goGameOver()
@@ -40,12 +52,10 @@ public class GameOverScript : MonoBehaviour {
         if (interstitial!=null && interstitial.IsLoaded()) {
             interstitial.Show();
         }
+        isPlay2x = true;
+        isPlay5Gemas = true;
     }
 
-    public void resetButtons(){
-        btnPlay2X.SetActive(true);
-        btnPlay5Gemas.SetActive(true);
-    }
 
     public void ConfigureVideoRequest2xScore(){
 
@@ -163,16 +173,16 @@ public class GameOverScript : MonoBehaviour {
 
 
     public void play2X(){
-        btnPlay2X.GetComponent<Button>().interactable = false;
         if(this.rewardVideo2x.IsLoaded()){
             this.rewardVideo2x.Show();
+            isPlay2x = false;
         }
     }
 
     public void play5Gemas(){
-        btnPlay5Gemas.GetComponent<Button>().interactable = false;
         if(this.rewardVideo5Gemas.IsLoaded()){
             this.rewardVideo5Gemas.Show();
+            isPlay5Gemas = false;
         }
     }
 
@@ -181,13 +191,11 @@ public class GameOverScript : MonoBehaviour {
         VideoRequest2xScore();
         VideoRequest5Gemas();
         GameObject.FindGameObjectWithTag("GameController").GetComponent<AdsScript>().RequestBanner();
-        btnPlay2X.GetComponent<Button>().interactable = true;
-        btnPlay5Gemas.GetComponent<Button>().interactable = true;
     }
 
     public void HandleRewardVideo2xLoaded(object sender, EventArgs args)
     {
-        //btnPlay2X.GetComponent<Button>().interactable = true;
+        
     }
 
     public void HandleRewardVideo2xFailedToLoad(object sender, AdFailedToLoadEventArgs args)
