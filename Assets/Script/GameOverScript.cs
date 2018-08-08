@@ -17,6 +17,7 @@ public class GameOverScript : MonoBehaviour {
     private RewardBasedVideoAd rewardVideo2x;
     private RewardBasedVideoAd rewardVideo5Gemas;
 
+    
 
     void Start(){
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
@@ -37,11 +38,13 @@ public class GameOverScript : MonoBehaviour {
     {
         gc.currentState = GameController.GameStates.GameOver;
         if (interstitial!=null && interstitial.IsLoaded()) {
-            float x = UnityEngine.Random.Range(0, 1f);
-            if(x < 0.75f){
-                interstitial.Show();
-            }
+            interstitial.Show();
         }
+    }
+
+    public void resetButtons(){
+        btnPlay2X.SetActive(true);
+        btnPlay5Gemas.SetActive(true);
     }
 
     public void ConfigureVideoRequest2xScore(){
@@ -178,11 +181,13 @@ public class GameOverScript : MonoBehaviour {
         VideoRequest2xScore();
         VideoRequest5Gemas();
         GameObject.FindGameObjectWithTag("GameController").GetComponent<AdsScript>().RequestBanner();
+        btnPlay2X.GetComponent<Button>().interactable = true;
+        btnPlay5Gemas.GetComponent<Button>().interactable = true;
     }
 
     public void HandleRewardVideo2xLoaded(object sender, EventArgs args)
     {
-        btnPlay2X.GetComponent<Button>().interactable = true;
+        //btnPlay2X.GetComponent<Button>().interactable = true;
     }
 
     public void HandleRewardVideo2xFailedToLoad(object sender, AdFailedToLoadEventArgs args)
@@ -223,7 +228,7 @@ public class GameOverScript : MonoBehaviour {
 
     public void HandleRewardVideo5GemasLoaded(object sender, EventArgs args)
     {
-        btnPlay5Gemas.GetComponent<Button>().interactable = true;
+        //btnPlay5Gemas.GetComponent<Button>().interactable = true;
     }
 
     public void HandleRewardVideo5GemasFailedToLoad(object sender, AdFailedToLoadEventArgs args)
