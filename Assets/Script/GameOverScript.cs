@@ -202,7 +202,7 @@ public class GameOverScript : MonoBehaviour {
 
     public void HandleRewardVideo2xClosed(object sender, EventArgs args)
     {
-        MonoBehaviour.print("HandleRewardBasedVideoClosed event received");
+        VideoRequest2xScore();
     }
 
     public void HandleRewardVideo2xRewarded(object sender, Reward args)
@@ -243,7 +243,7 @@ public class GameOverScript : MonoBehaviour {
 
     public void HandleRewardVideo5GemasClosed(object sender, EventArgs args)
     {
-        MonoBehaviour.print("HandleRewardBasedVideoClosed event received");
+        VideoRequest5Gemas();
     }
 
     public void HandleRewardVideo5GemasRewarded(object sender, Reward args)
