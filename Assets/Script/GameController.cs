@@ -31,9 +31,7 @@ public class GameController : MonoBehaviour {
 	//private bool criarPlataforma = true;
 
 	public GameObject obj;
-	//private float amout = 10;
-	private float decrementoTempoInicial = 1.5f;
-	private float decrementaTempo = 1.5f;
+	
 
 	public GameObject player;
 	public BezierCurve curve;
@@ -265,7 +263,7 @@ public class GameController : MonoBehaviour {
 			
 		
 		}else if(currentState == GameStates.Watting){			
-			if(!audioS.isPlaying){
+			if(audioS.enabled && !audioS.isPlaying){
 				audioS.Play();
 			}
 

@@ -18,7 +18,11 @@ public class ScripPlataforma : MonoBehaviour {
 	void Start(){
 		gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 	}
-	
+	void Update(){
+		if(gc == null){
+			gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+		}
+	}
 
 	 void OnCollisionEnter2D(Collision2D col)
     {
@@ -38,7 +42,11 @@ public class ScripPlataforma : MonoBehaviour {
 		if(gc.currentState == GameController.GameStates.InGame){
 			Rigidbody2D rigi = col.collider.GetComponent<Rigidbody2D>();
 			if(rigi != null && pulou){
-				col.gameObject.GetComponent<Animator>().SetBool("jump", true);
+				if(col.gameObject.GetComponent<PlayerController>() != null){
+					col.gameObject.GetComponent<Animator>().SetBool("jump", true);
+				}else{
+					col.gameObject.GetComponent<Animator>().SetTrigger("jump");
+				}
 				pulou = false;
 			}
 		}
@@ -47,7 +55,11 @@ public class ScripPlataforma : MonoBehaviour {
 	void OnCollisionStay2D(Collision2D col){
 		if(gc.currentState == GameController.GameStates.InGame && inicio){
 			if(col.relativeVelocity.y <= 0f){
-				col.gameObject.GetComponent<Animator>().SetBool("jump", true);
+				if(col.gameObject.GetComponent<PlayerController>() != null){
+					col.gameObject.GetComponent<Animator>().SetBool("jump", true);
+				}else{
+					col.gameObject.GetComponent<Animator>().SetTrigger("jump");
+				}
 				Rigidbody2D rigi = col.collider.GetComponent<Rigidbody2D>();
 				if(rigi != null){
 					Vector2 velocity = rigi.velocity;

@@ -27,8 +27,6 @@ public class ScenneEggScript : MonoBehaviour {
 		gc.cenaEgg = true;
 	}
 
-
-		Vector3 spawPosition = new Vector3();
 	
 	public void SpawnPlataforma(){
 

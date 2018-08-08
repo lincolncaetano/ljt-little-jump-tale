@@ -8,11 +8,9 @@ public class Player_control : MonoBehaviour {
 	private Animator animSpecial;
 	public bool left = true;
 	private GameController controller;
-	private bool pula = false;
 	public bool especial = false;
 	public Rigidbody2D rigi;
 	private Vector2 sizeColl;
-	public int especialContPla;
 	public int usoSpeceial;
 	public AudioClip audioGoomo;
 	public AudioClip audioSpecial;
@@ -20,7 +18,6 @@ public class Player_control : MonoBehaviour {
     public AudioSource audio;
 
 	private bool validaGameOver = true;
-	private bool validaEspecial = true;
 
 
 	[HideInInspector] public bool facingRight = true;
@@ -118,7 +115,9 @@ public class Player_control : MonoBehaviour {
     }
 
 	public void AudioLose(){
-		audio.PlayOneShot(audioOps);
+		if(audio.enabled){
+			audio.PlayOneShot(audioOps);
+		}
 	}
 
 	void Flip()
@@ -147,11 +146,9 @@ public class Player_control : MonoBehaviour {
 	private void AtivaRaio(){
 		if(timeRaio > 0f){
 			raio.SetActive(true);
-			anim.SetBool("special", true);
 			timeRaio -= Time.deltaTime;
 		}else{
 			raio.SetActive(false);
-			anim.SetBool("special", false);
 		}
 	}
 	
@@ -178,7 +175,9 @@ public class Player_control : MonoBehaviour {
         if(col.gameObject.tag == "Plataforma"){
 			if(col.relativeVelocity.y > 0f){
 				//anim.SetTrigger("jump");
-				audio.PlayOneShot(audioGoomo);
+				if(audio.enabled){
+					audio.PlayOneShot(audioGoomo);
+				}
 			}
 		}
     }

@@ -22,7 +22,11 @@ public class SairEggScript : MonoBehaviour {
 				timeVolta -= Time.deltaTime;
 			}else{
 				Vector3 vec = new Vector3(0, controller.destroyer.transform.position.y + 20, player.transform.position.z);
-				player.GetComponent<Player_control>().enabled = true;
+				if(player.GetComponent<PlayerController>() != null){
+					player.GetComponent<PlayerController>().enabled = true;
+				}else{
+					player.GetComponent<Player_control>().enabled = true;
+				}
 				player.transform.position = vec;
 				controller.cenaEgg = false;
 				GameObject.FindGameObjectWithTag("CenaEgg").SetActive(false);
@@ -35,7 +39,11 @@ public class SairEggScript : MonoBehaviour {
 			if(other.tag == "Player"){
 				teletransporte.SetActive(true);
 				voltarValido = true;
-				other.GetComponent<Player_control>().enabled = false;
+				if(player.GetComponent<PlayerController>() != null){
+					other.GetComponent<PlayerController>().enabled = true;
+				}else{
+					other.GetComponent<Player_control>().enabled = true;
+				}
 			}
 		}
 

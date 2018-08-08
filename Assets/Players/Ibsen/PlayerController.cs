@@ -5,7 +5,6 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
 	public Animator anim;
-	private Animator animSpecial;
 	public bool left = true;
 	private GameController controller;
 	private bool pula = false;
@@ -29,7 +28,6 @@ public class PlayerController : MonoBehaviour {
 
 	void Start(){
 		controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-		animSpecial = GameObject.FindGameObjectWithTag("ShowSpecial").GetComponent<Animator>();
 		raio = transform.Find("Raio").gameObject;
 		ima = transform.Find("Ima").gameObject;
 
